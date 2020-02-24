@@ -1,5 +1,6 @@
 package simulator.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public abstract class Road extends SimulatedObject {
 			throw new RoadCreationException("Maximum speed must be positive");
 		} else if(contLimit < 0) {
 			throw new RoadCreationException("Contamination limit must be positive");
-		} else if(length > 0) {
+		} else if(length < 0) {
 			throw new RoadCreationException("Length must be positive");
 		} else if(srcJunc == null || destJunc == null) {
 			throw new RoadCreationException("Source and destination junctions can't be null");
@@ -42,12 +43,13 @@ public abstract class Road extends SimulatedObject {
 			throw new RoadCreationException("Weather cannot be null");
 		} else {
 			this.srcJunc = srcJunc;
+			this.destJunc = destJunc;
 			try {
 				srcJunc.addOutGoingRoad(this);
+				destJunc.addIncomingRoad(this);
 			} catch (JunctionMethodException e) {
 				throw new RoadCreationException("Problem inserting as outgoing road: " + e.getMessage());
 			}
-			this.destJunc = destJunc;
 			this.maxSpeed = maxSpeed;
 			speedLimit = maxSpeed;
 			this.contLimit = contLimit;
@@ -55,6 +57,7 @@ public abstract class Road extends SimulatedObject {
 			this.weather = weather;
 			contTotal = 0;
 			vehicles = new SortedArrayList<Vehicle>();
+			vehiclesMap = new HashMap<String, Vehicle>();
 		}
 	}
 
@@ -83,7 +86,7 @@ public abstract class Road extends SimulatedObject {
 		jo.put("co2", contTotal);
 		JSONArray ja = new JSONArray();
 		for(Vehicle v: vehicles) {
-			ja.put(v);
+			ja.put(v._id);
 		}
 		jo.put("vehicles", ja);
 		return jo;
@@ -111,7 +114,7 @@ public abstract class Road extends SimulatedObject {
 	}
 	
 	protected void addContamination(int c) throws RoadMethodException {
-		if(c > 0) {
+		if(c >= 0) {
 			contTotal += c;
 		} else {
 			throw new RoadMethodException("The argument to addContamination must be positive.");

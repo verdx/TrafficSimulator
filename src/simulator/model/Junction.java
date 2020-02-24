@@ -46,34 +46,39 @@ public class Junction extends SimulatedObject {
 
 	@Override
 	void advance(int time) {
-		List<Vehicle> toDequeue = dqStrategy.dequeue(queues.get(currGreen));
-		for( Vehicle v: toDequeue) {
-			try {
-				v.moveToNextRoad();
-			} catch (Exception e) {
-				System.out.println("Problem advancing junction: " + this._id + ": " + e.getMessage());
-			}
-			queues.get(currGreen).remove(v);
-		}
+		
 		int index = lsStrategy.chooseNextGreen(in_roads, queues, currGreen, lastSwitchingTime, time);
 		if(index != currGreen) {
 			currGreen = index;
 			lastSwitchingTime = time;
 		}
+		if (currGreen != -1) {
+			List<Vehicle> toDequeue = dqStrategy.dequeue(queues.get(currGreen));
+			for( Vehicle v: toDequeue) {
+				try {
+					v.moveToNextRoad();
+				} catch (Exception e) {
+					System.out.println("Problem advancing junction: " + this._id + ": " + e.getMessage());
+				}
+				queues.get(currGreen).remove(v);
+			}
+		}
+		
 	}
 
 	@Override
 	public JSONObject report() {
 		JSONObject jo = new JSONObject();
-		jo.append("id", this._id);
-		jo.append("green", in_roads.get(currGreen)._id);
+		jo.put("id", this._id);
+		String currGreenRoad = currGreen != -1 ? in_roads.get(currGreen)._id : "none";
+		jo.put("green", currGreenRoad);
 		JSONArray ja = new JSONArray();
 		for (Road r: in_roads) {
 			JSONObject jo1 = new JSONObject();
 			jo1.put("road", r._id);
 			JSONArray ja1 = new JSONArray();
 			for(Vehicle v: queueByRoad.get(r)) {
-				ja1.put(v);
+				ja1.put(v._id);
 			}
 			jo1.put("vehicles", ja1);
 		}

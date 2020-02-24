@@ -83,7 +83,7 @@ public class RoadMap {
 		Iterator<Road> rIt = roads.iterator();
 		while (rIt.hasNext() && !result) {
 			Road r = rIt.next();
-			if(r.getDestJunc()==j1 && r.getSrcJunc()==j2) {
+			if(r.getSrcJunc()==j1 && r.getDestJunc()==j2) {
 				result = true;
 			}
 		}
@@ -121,6 +121,8 @@ public class RoadMap {
 		junctionsMap = new HashMap<String, Junction>();
 		roadsMap = new HashMap<String, Road>();
 		vehiclesMap = new HashMap<String, Vehicle>();
+		srcJuncRoadMap = new HashMap<Road, Junction>();
+		destJuncRoadMap = new HashMap<Road, Junction>();
 	}
 	
 	public JSONObject report() {
@@ -128,14 +130,20 @@ public class RoadMap {
 		
 		
 		JSONArray junctions_ja = new JSONArray();
+		for(Junction j: junctions)
+			junctions_ja.put(j.report());
 		jo.put("junctions", junctions_ja);
 		
 		
-		JSONArray roads_ja = new JSONArray(new ArrayList<Road>().addAll(roads));
+		JSONArray roads_ja = new JSONArray();
+		for(Road r: roads) 
+			roads_ja.put(r.report());
 		jo.put("roads", roads_ja);
 		
 		
-		JSONArray vehicles_ja = new JSONArray(new ArrayList<Vehicle>().addAll(vehicles));
+		JSONArray vehicles_ja = new JSONArray();
+		for(Vehicle v: vehicles)
+			vehicles_ja.put(v.report());
 		jo.put("vehicles", vehicles_ja);
 		
 		return jo;

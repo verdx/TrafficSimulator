@@ -18,7 +18,7 @@ public class NewCityRoadEvent extends NewRoadEvent {
 					contLimit, length, weather);
 			map.addRoad(cr);
 		} catch (RoadCreationException e) {
-			System.out.println("Problem executing NewCityRoadEvent:" + e.getMessage());
+			System.out.println("Problem executing NewCityRoadEvent: " + e.getMessage());
 		}
 	}
 }

@@ -12,8 +12,8 @@ import simulator.model.SetContaminationClass;
 
 public class SetContClassEventBuilder extends Builder<Event>{
 
-	SetContClassEventBuilder() {
-		super("set_weather");
+	public SetContClassEventBuilder() {
+		super("set_cont_class");
 	}
 
 	@Override

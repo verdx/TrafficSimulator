@@ -1,7 +1,9 @@
 package simulator.launcher;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -25,7 +27,10 @@ import simulator.factories.MoveFirstStrategyBuilder;
 import simulator.factories.NewCityRoadEventBuilder;
 import simulator.factories.NewInterCityRoadEventBuilder;
 import simulator.factories.NewJunctionEventBuilder;
+import simulator.factories.NewVehicleEventBuilder;
 import simulator.factories.RoundRobinStrategyBuilder;
+import simulator.factories.SetContClassEventBuilder;
+import simulator.factories.SetWeatherEventBuilder;
 import simulator.model.DequeuingStrategy;
 import simulator.model.Event;
 import simulator.model.LightSwitchingStrategy;
@@ -81,7 +86,7 @@ public class Main {
 		cmdLineOptions.addOption(
 				Option.builder("o").longOpt("output").hasArg().desc("Output file, where reports are written.").build());
 		cmdLineOptions.addOption(Option.builder("h").longOpt("help").desc("Print this message").build());
-		cmdLineOptions.addOption(Option.builder("t").longOpt("ticks").hasArg().desc("Ticks to the simulator’s main loop (default\n" + 
+		cmdLineOptions.addOption(Option.builder("t").longOpt("ticks").hasArg().desc("Ticks to the simulatorï¿½s main loop (default\n" + 
 				"value is 10).").build());
 		
 		return cmdLineOptions;
@@ -110,7 +115,7 @@ public class Main {
 		try {
 			String timeLimitStr = line.getOptionValue("t");
 
-			if(_timeLimit == null) {
+			if(timeLimitStr == null) {
 				_timeLimit = _timeLimitDefaultValue;
 			} else {
 				_timeLimit = Integer.parseInt(timeLimitStr);
@@ -140,6 +145,9 @@ public class Main {
 		ebs.add( new NewJunctionEventBuilder(lssFactory,dqsFactory) );
 		ebs.add( new NewCityRoadEventBuilder() );
 		ebs.add( new NewInterCityRoadEventBuilder() );
+		ebs.add( new NewVehicleEventBuilder() );
+		ebs.add( new SetWeatherEventBuilder() );
+		ebs.add( new SetContClassEventBuilder() );
 
 
 		_eventsFactory = new BuilderBasedFactory<Event>(ebs);
@@ -152,6 +160,8 @@ public class Main {
 			Controller cont = new Controller(sim, _eventsFactory);
 			
 			OutputStream out = new FileOutputStream(_outFile);
+			InputStream in = new FileInputStream(_inFile);
+			cont.loadEvents(in);
 			cont.run(_timeLimit, out);
 		} catch (Exception e) {
 			e.printStackTrace();

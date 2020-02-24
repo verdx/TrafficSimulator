@@ -62,6 +62,8 @@ public class Vehicle extends SimulatedObject {
 				distRec = speed;
 				location += speed;
 			}
+			
+			distTotal += distRec;
 			int cont = contClass * distRec;
 			contTotal += cont;
 			try {
@@ -71,9 +73,9 @@ public class Vehicle extends SimulatedObject {
 			}
 			if (fin) {
 				this.status = VehicleStatus.WAITING;
-				road.getSrcJunc().enter(this);
 				speed = 0;
 				location = 0;
+				road.getDestJunc().enter(this);
 			}
 		}
 
@@ -127,6 +129,7 @@ public class Vehicle extends SimulatedObject {
 			}
 			road = nextRoad;
 			road.enter(this);
+			status = VehicleStatus.TRAVELING;
 			nextJunction++;
 		} else {
 			status = VehicleStatus.ARRIVED;

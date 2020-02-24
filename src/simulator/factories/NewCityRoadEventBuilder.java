@@ -23,13 +23,13 @@ public class NewCityRoadEventBuilder extends Builder<Event>{
 			String dest = data.getString("dest");
 			int length = data.getInt("length");
 			int co2limit = data.getInt("co2limit");
-			int maxSpeed = data.getInt("maxSpeed");
+			int maxSpeed = data.getInt("maxspeed");
 			String weather_str = data.getString("weather");
 			Weather weather = Weather.valueOf(weather_str.toUpperCase());
 			
 			cre = new NewCityRoadEvent(time, id, src, dest, maxSpeed, co2limit, length, weather);
 		} catch (JSONException e) {
-			System.out.println("Problem parsing JSONObject for NewCityRoadEvent" + e.getMessage());
+			System.out.println("Problem parsing JSONObject for NewCityRoadEvent: " + e.getMessage());
 		}
 		return cre;
 	}

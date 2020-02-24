@@ -28,17 +28,16 @@ public class Simulator {
 
 		//Ejecutar eventos
 		Iterator<Event> evItr = events.iterator();
-		int itTime = 0;
-		while(evItr.hasNext() && itTime < this._time) {
-			itTime = evItr.next()._time;
+
+		
+		Event e;
+		int eTime = 0;
+		while(evItr.hasNext() && eTime <= this._time) {
+			e = evItr.next();
+			if (e._time == this._time) e.execute(roadMap);
+			eTime = e._time;
 		}
-		if(evItr.hasNext()) {
-			Event e = evItr.next();
-			while(e._time == this._time && evItr.hasNext()) {
-				e.execute(roadMap);
-				e = evItr.next();
-			}
-		}
+		
 
 		//Avanzar cruces
 		for(Junction j: roadMap.getJunctions()) {

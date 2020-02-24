@@ -81,8 +81,8 @@
   	  "type" : "set_weather",
       "data" : {
           "time"     : 100,
-          "info"     : [ { "road" : r1, "weather": "SUNNY" }, 
-                         { "road" : r2, "weather": "STORM" }, 
+          "info"     : [ { "road" : "r1", "weather": "SUNNY" }, 
+                         { "road" : "r2", "weather": "STORM" }
 	                   ]
   	  }
     },
@@ -90,8 +90,8 @@
       "type" : "set_cont_class",
       "data" : {
           "time"     : 50,
-          "info"     : [ { "vehicle" : v1, "class": 5 }, 
-                         { "vehicle" : v2, "class": 2 }, 
+          "info"     : [ { "vehicle" : "v1", "class": 5 }, 
+                         { "vehicle" : "v2", "class": 2 }
                        ]
       }
     }  

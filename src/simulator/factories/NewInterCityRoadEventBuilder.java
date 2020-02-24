@@ -23,7 +23,7 @@ public class NewInterCityRoadEventBuilder extends Builder<Event>{
 			String dest = data.getString("dest");
 			int length = data.getInt("length");
 			int co2limit = data.getInt("co2limit");
-			int maxSpeed = data.getInt("maxSpeed");
+			int maxSpeed = data.getInt("maxspeed");
 			String weather_str = data.getString("weather");
 			Weather weather = Weather.valueOf(weather_str.toUpperCase());
 			
