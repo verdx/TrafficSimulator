@@ -1,6 +1,7 @@
 package simulator.model;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,6 @@ import org.json.JSONObject;
 import simulator.exceptions.RoadCreationException;
 import simulator.exceptions.RoadMethodException;
 import simulator.exceptions.VehicleMethodException;
-import simulator.misc.SortedArrayList;
 
 public abstract class Road extends SimulatedObject {
 	
@@ -56,7 +56,7 @@ public abstract class Road extends SimulatedObject {
 			this.length = length;
 			this.weather = weather;
 			contTotal = 0;
-			vehicles = new SortedArrayList<Vehicle>();
+			vehicles = new LinkedList<Vehicle>();
 			vehiclesMap = new HashMap<String, Vehicle>();
 		}
 	}

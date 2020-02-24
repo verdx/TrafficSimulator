@@ -92,7 +92,7 @@ public class TestExamples {
 		String path = args.length == 0 ? "resources/examples" : args[0];
 
 		// change 'true' to 'false' to generate the expected output instead of testing
-		start(path, false);
+		start(path, true);
 	}
 
 }

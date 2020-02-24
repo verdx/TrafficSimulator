@@ -27,7 +27,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -61,7 +64,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -95,7 +101,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -129,7 +138,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -163,7 +175,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -197,7 +212,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -231,7 +249,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -265,7 +286,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -299,7 +323,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -333,7 +360,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -367,7 +397,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -401,7 +434,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -435,7 +471,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -469,7 +508,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -503,7 +545,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -537,7 +582,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -571,7 +619,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -605,7 +656,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -639,7 +693,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -673,7 +730,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -707,7 +767,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -741,7 +804,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -775,7 +841,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -809,7 +878,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -843,7 +915,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -877,7 +952,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -911,7 +989,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -945,7 +1026,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -979,7 +1063,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1013,7 +1100,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1047,7 +1137,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1081,7 +1174,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1115,7 +1211,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1149,7 +1248,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1183,7 +1285,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1217,7 +1322,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1251,7 +1359,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1285,7 +1396,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1319,7 +1433,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1353,7 +1470,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1387,7 +1507,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1421,7 +1544,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1455,7 +1581,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1489,7 +1618,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1523,7 +1655,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1557,7 +1692,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1591,7 +1729,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1625,7 +1766,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1659,7 +1803,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1693,7 +1840,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1727,7 +1877,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1761,7 +1914,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1795,7 +1951,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1829,7 +1988,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1863,7 +2025,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1897,7 +2062,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1931,7 +2099,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1965,7 +2136,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -1999,7 +2173,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2033,7 +2210,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2067,7 +2247,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2101,7 +2284,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2135,7 +2321,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2169,7 +2358,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2203,7 +2395,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2237,7 +2432,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2271,7 +2469,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2305,7 +2506,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2339,7 +2543,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2373,7 +2580,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2407,7 +2617,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2441,7 +2654,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2475,7 +2691,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2509,7 +2728,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2543,7 +2765,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2577,7 +2802,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2611,7 +2839,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2645,7 +2876,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2679,7 +2913,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2713,7 +2950,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2747,7 +2987,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2781,7 +3024,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2815,7 +3061,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2849,7 +3098,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2883,7 +3135,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2917,7 +3172,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2951,7 +3209,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -2985,7 +3246,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3019,7 +3283,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3053,7 +3320,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3087,7 +3357,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3121,7 +3394,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3155,7 +3431,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3189,7 +3468,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3223,7 +3505,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3257,7 +3542,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3291,7 +3579,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3325,7 +3616,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3359,7 +3653,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3393,7 +3690,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3427,7 +3727,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3461,7 +3764,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3495,7 +3801,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3529,7 +3838,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3563,7 +3875,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3597,7 +3912,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3631,7 +3949,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3665,7 +3986,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3699,7 +4023,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3733,7 +4060,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3767,7 +4097,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3801,7 +4134,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3835,7 +4171,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3869,7 +4208,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3903,7 +4245,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3937,7 +4282,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -3971,7 +4319,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4005,7 +4356,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4039,7 +4393,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4073,7 +4430,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4107,7 +4467,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4141,7 +4504,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4175,7 +4541,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4209,7 +4578,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4243,7 +4615,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": ["v1"]
+               }],
                "id": "j2"
             }
          ]
@@ -4264,7 +4639,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4275,7 +4650,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4296,7 +4674,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4307,7 +4685,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4328,7 +4709,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4339,7 +4720,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4360,7 +4744,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4371,7 +4755,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4392,7 +4779,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4403,7 +4790,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4424,7 +4814,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4435,7 +4825,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4456,7 +4849,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4467,7 +4860,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4488,7 +4884,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4499,7 +4895,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4520,7 +4919,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4531,7 +4930,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4552,7 +4954,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4563,7 +4965,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4584,7 +4989,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4595,7 +5000,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4616,7 +5024,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4627,7 +5035,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4648,7 +5059,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4659,7 +5070,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4680,7 +5094,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4691,7 +5105,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4712,7 +5129,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4723,7 +5140,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4744,7 +5164,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4755,7 +5175,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4776,7 +5199,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4787,7 +5210,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4808,7 +5234,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4819,7 +5245,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4840,7 +5269,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4851,7 +5280,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4872,7 +5304,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4883,7 +5315,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4904,7 +5339,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4915,7 +5350,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4936,7 +5374,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4947,7 +5385,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -4968,7 +5409,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -4979,7 +5420,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -5000,7 +5444,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -5011,7 +5455,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]
@@ -5032,7 +5479,7 @@
             "co2": 10000,
             "id": "v1",
             "class": 1,
-            "speed": 80,
+            "speed": 0,
             "status": "ARRIVED"
          }],
          "junctions": [
@@ -5043,7 +5490,10 @@
             },
             {
                "green": "r1",
-               "queues": [],
+               "queues": [{
+                  "road": "r1",
+                  "vehicles": []
+               }],
                "id": "j2"
             }
          ]

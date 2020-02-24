@@ -2,7 +2,6 @@ package simulator.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -11,7 +10,7 @@ import simulator.exceptions.RoadMethodException;
 import simulator.exceptions.VehicleCreationException;
 import simulator.exceptions.VehicleMethodException;
 
-public class Vehicle extends SimulatedObject {
+public class Vehicle extends SimulatedObject{
 	
 	private List<Junction> itinerary;
 	private int maxSpeed;
@@ -99,12 +98,14 @@ public class Vehicle extends SimulatedObject {
 	}
 	
 	void setSpeed(int s) throws VehicleMethodException {
-		if (s < 0) {
-			throw new VehicleMethodException("Setting speed, argument must be positive");
-		} else if (s > maxSpeed) {
-			this.speed = maxSpeed;
-		} else {
-			this.speed = s;
+		if(status == VehicleStatus.TRAVELING) {
+			if (s < 0) {
+				throw new VehicleMethodException("Setting speed, argument must be positive");
+			} else if (s > maxSpeed) {
+				this.speed = maxSpeed;
+			} else {
+				this.speed = s;
+			}
 		}
 	}
 	
@@ -125,7 +126,7 @@ public class Vehicle extends SimulatedObject {
 				road.exit(this);
 				nextRoad = road.getDestJunc().roadTo(itinerary.get(nextJunction));
 			} else {
-				throw new VehicleMethodException("Cannot move to next road is status isnt't pending or waiting");
+				throw new VehicleMethodException("Cannot move to next road if status isnt't pending or waiting");
 			}
 			road = nextRoad;
 			road.enter(this);
@@ -159,8 +160,4 @@ public class Vehicle extends SimulatedObject {
 	public List<Junction> getItinerary() {
 		return itinerary;
 	}
-	
-	
-	
-
 }

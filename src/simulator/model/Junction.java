@@ -58,7 +58,7 @@ public class Junction extends SimulatedObject {
 				try {
 					v.moveToNextRoad();
 				} catch (Exception e) {
-					System.out.println("Problem advancing junction: " + this._id + ": " + e.getMessage());
+					System.out.println("Problem advancing junction " + this._id + ": " + e.getMessage());
 				}
 				queues.get(currGreen).remove(v);
 			}
@@ -72,17 +72,18 @@ public class Junction extends SimulatedObject {
 		jo.put("id", this._id);
 		String currGreenRoad = currGreen != -1 ? in_roads.get(currGreen)._id : "none";
 		jo.put("green", currGreenRoad);
-		JSONArray ja = new JSONArray();
+		JSONArray queues = new JSONArray();
 		for (Road r: in_roads) {
 			JSONObject jo1 = new JSONObject();
 			jo1.put("road", r._id);
-			JSONArray ja1 = new JSONArray();
+			JSONArray vehicles = new JSONArray();
 			for(Vehicle v: queueByRoad.get(r)) {
-				ja1.put(v._id);
+				vehicles.put(v._id);
 			}
-			jo1.put("vehicles", ja1);
+			jo1.put("vehicles", vehicles);
+			queues.put(jo1);
 		}
-		jo.put("queues", ja);
+		jo.put("queues", queues);
 		return jo;
 	}
 

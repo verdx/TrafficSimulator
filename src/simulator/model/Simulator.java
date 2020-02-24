@@ -3,7 +3,6 @@ package simulator.model;
 import java.util.Iterator;
 import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import simulator.misc.SortedArrayList;
@@ -53,7 +52,7 @@ public class Simulator {
 	public void reset() {
 		_time = 0;
 		roadMap = new RoadMap();
-		events = new SortedArrayList<Event>();
+		events = new SortedArrayList<Event>(new EventComparator());
 	}
 	
 	public JSONObject report() {

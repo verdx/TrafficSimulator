@@ -25,7 +25,7 @@ public class InterCityRoad extends Road {
 	@Override
 	void updateSpeedLimit() {
 		if(contTotal > contLimit) {
-			speedLimit = (int) (maxSpeed * 0.5);
+			speedLimit = (int) (maxSpeed * 0.50);
 		} else {
 			speedLimit = maxSpeed;
 		}
@@ -35,7 +35,7 @@ public class InterCityRoad extends Road {
 	int calculateVehicleSpeed(Vehicle v) {
 		int resul;
 		if (weather == Weather.STORM) {
-			resul = (int)(speedLimit * 0.8);
+			resul = (int)(speedLimit * 0.80);
 		} else {
 			resul = speedLimit;
 		}
