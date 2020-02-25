@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import simulator.exceptions.RoadCreationException;
 import simulator.exceptions.RoadMethodException;
 import simulator.exceptions.VehicleMethodException;
+import simulator.misc.SortedArrayList;
 
 public abstract class Road extends SimulatedObject {
 	
@@ -56,7 +57,7 @@ public abstract class Road extends SimulatedObject {
 			this.length = length;
 			this.weather = weather;
 			contTotal = 0;
-			vehicles = new LinkedList<Vehicle>();
+			vehicles = new SortedArrayList<Vehicle>(new VehicleComparator());
 			vehiclesMap = new HashMap<String, Vehicle>();
 		}
 	}

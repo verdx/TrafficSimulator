@@ -73,7 +73,6 @@ public class Vehicle extends SimulatedObject{
 			if (fin) {
 				this.status = VehicleStatus.WAITING;
 				speed = 0;
-				location = 0;
 				road.getDestJunc().enter(this);
 			}
 		}
@@ -129,6 +128,7 @@ public class Vehicle extends SimulatedObject{
 				throw new VehicleMethodException("Cannot move to next road if status isnt't pending or waiting");
 			}
 			road = nextRoad;
+			location = 0;
 			road.enter(this);
 			status = VehicleStatus.TRAVELING;
 			nextJunction++;

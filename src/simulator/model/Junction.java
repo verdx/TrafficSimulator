@@ -46,12 +46,7 @@ public class Junction extends SimulatedObject {
 
 	@Override
 	void advance(int time) {
-		
-		int index = lsStrategy.chooseNextGreen(in_roads, queues, currGreen, lastSwitchingTime, time);
-		if(index != currGreen) {
-			currGreen = index;
-			lastSwitchingTime = time;
-		}
+				
 		if (currGreen != -1) {
 			List<Vehicle> toDequeue = dqStrategy.dequeue(queues.get(currGreen));
 			for( Vehicle v: toDequeue) {
@@ -62,6 +57,12 @@ public class Junction extends SimulatedObject {
 				}
 				queues.get(currGreen).remove(v);
 			}
+		}
+		
+		int index = lsStrategy.chooseNextGreen(in_roads, queues, currGreen, lastSwitchingTime, time);
+		if(index != currGreen) {
+			currGreen = index;
+			lastSwitchingTime = time;
 		}
 		
 	}
