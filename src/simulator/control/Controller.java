@@ -49,7 +49,7 @@ public class Controller {
 		}
 		jo.put("states", states);
 		PrintStream p = new PrintStream(out);
-		p.print(jo.toString());
+		p.print(jo.toString(4));
 	}
 	
 	public void reset() {

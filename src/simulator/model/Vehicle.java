@@ -134,6 +134,7 @@ public class Vehicle extends SimulatedObject{
 			nextJunction++;
 		} else {
 			status = VehicleStatus.ARRIVED;
+			road.exit(this);
 		}
 	}
 
