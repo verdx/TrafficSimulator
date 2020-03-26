@@ -1,4 +1,10 @@
-package simulator.model;
+package simulator.events;
+
+import simulator.model.DequeuingStrategy;
+import simulator.model.Junction;
+import simulator.model.JunctionCreationException;
+import simulator.model.LightSwitchingStrategy;
+import simulator.model.RoadMap;
 
 public class NewJunctionEvent extends Event {
 	
@@ -19,7 +25,7 @@ public class NewJunctionEvent extends Event {
 	}
 
 	@Override
-	void execute(RoadMap map) {
+	public void execute(RoadMap map) {
 		Junction junction;
 		try {
 			junction = new Junction(id, lsStrategy, dqStrategy, xCoor, yCoor);
@@ -28,6 +34,11 @@ public class NewJunctionEvent extends Event {
 			System.out.println("Problem executing NewJunctionEvent" + e.getMessage());
 		}
 
+	}
+	
+	@Override
+	public String toString() {
+		return "New Junction '" + id + "'"; 
 	}
 
 }

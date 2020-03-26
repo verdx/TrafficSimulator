@@ -63,7 +63,7 @@ public abstract class Road extends SimulatedObject {
 
 
 	@Override
-	void advance(int time) {
+	void advance(int time) throws Exception {
 		reduceTotalContamination();
 		updateSpeedLimit();
 		for(Vehicle v: vehicles) {
@@ -71,7 +71,7 @@ public abstract class Road extends SimulatedObject {
 				v.setSpeed(calculateVehicleSpeed(v));
 				v.advance(time);
 			} catch (VehicleMethodException e) {
-				System.out.println("Problem changing vehicles speed: " + e.toString());
+				throw new Exception("Problem changing vehicles speed: " + e.toString());
 			}
 		}
 		vehicles.sort(new VehicleComparator());
@@ -105,7 +105,7 @@ public abstract class Road extends SimulatedObject {
 		vehicles.remove(v);
 	}
 
-	protected void setWeather(Weather w) throws RoadMethodException {
+	public void setWeather(Weather w) throws RoadMethodException {
 		if(w != null) {
 			weather = w;
 		} else {
@@ -125,18 +125,26 @@ public abstract class Road extends SimulatedObject {
 	abstract void updateSpeedLimit();
 	abstract int calculateVehicleSpeed(Vehicle v);
 		
-	protected Junction getDestJunc() {
+	public Junction getDestJunc() {
 		return destJunc;
 	}
 
 
-	protected Junction getSrcJunc() {
+	public Junction getSrcJunc() {
 		return srcJunc;
 	}
 
 
-	protected int getLength() {
+	public int getLength() {
 		return length;
+	}
+	
+	public int getTotalCO2() {
+		return contTotal;
+	}
+	
+	public int getCO2Limit() {
+		return contLimit;
 	}
 
 }

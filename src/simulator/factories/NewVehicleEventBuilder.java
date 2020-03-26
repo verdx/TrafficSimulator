@@ -7,8 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import simulator.model.Event;
-import simulator.model.NewVehicleEvent;
+import simulator.events.Event;
+import simulator.events.NewVehicleEvent;
 
 public class NewVehicleEventBuilder extends Builder<Event>{
 

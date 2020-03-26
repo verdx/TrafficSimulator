@@ -9,16 +9,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import simulator.events.Event;
 import simulator.factories.Factory;
-import simulator.model.Event;
-import simulator.model.Simulator;
+import simulator.model.TrafficSimObserver;
+import simulator.model.TrafficSimulator;
 
-public class Controller {
+public class Controller{
 	
-	private Simulator sim;
+	private TrafficSimulator sim;
 	private Factory<Event> eventsFactory;
 	
-	public Controller(Simulator sim, Factory<Event> eventsFactory) throws Exception {
+	public Controller(TrafficSimulator sim, Factory<Event> eventsFactory) throws Exception {
 		if(sim == null || eventsFactory == null) {
 			throw new Exception("Problem creating new Controller: simulator or events factory is null.");
 		} else {
@@ -40,7 +41,7 @@ public class Controller {
 		}
 	}
 	
-	public void run(int n, OutputStream out) {
+	public void run(int n, OutputStream out) throws Exception {
 		JSONObject jo = new JSONObject();
 		JSONArray states = new JSONArray();
 		for(int i = 0; i < n; i++) {
@@ -54,5 +55,17 @@ public class Controller {
 	
 	public void reset() {
 		sim.reset();
+	}
+	
+	public void addObserver(TrafficSimObserver o) {
+		sim.addObserver(o);
+	}
+	
+	public void removeObserver(TrafficSimObserver o) {
+		sim.removeObserver(o);
+	}
+	
+	public void addEvent(Event e) {
+		sim.addEvent(e);
 	}
 }

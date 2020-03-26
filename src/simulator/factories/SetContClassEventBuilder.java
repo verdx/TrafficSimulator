@@ -6,9 +6,9 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import simulator.events.Event;
+import simulator.events.SetContClassEvent;
 import simulator.misc.Pair;
-import simulator.model.Event;
-import simulator.model.SetContaminationClass;
 
 public class SetContClassEventBuilder extends Builder<Event>{
 
@@ -29,7 +29,7 @@ public class SetContClassEventBuilder extends Builder<Event>{
 				cs.add(new Pair<String, Integer>(vehicle, contClass));
 			}
 			
-			swe = new SetContaminationClass(time, cs);
+			swe = new SetContClassEvent(time, cs);
 		} catch (Exception e) {
 			System.out.println("Problem parsing JSONObject for SetContClassEvent" + e.getMessage());
 		}

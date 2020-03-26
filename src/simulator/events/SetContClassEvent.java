@@ -1,14 +1,15 @@
-package simulator.model;
+package simulator.events;
 
 import java.util.List;
 
 import simulator.misc.Pair;
+import simulator.model.RoadMap;
 
-public class SetContaminationClass extends Event {
+public class SetContClassEvent extends Event {
 	
 	private List<Pair<String, Integer>> cs;
 
-	public SetContaminationClass(int time, List<Pair<String, Integer>> cs) throws Exception {
+	public SetContClassEvent(int time, List<Pair<String, Integer>> cs) throws Exception {
 		super(time);
 		if (cs == null) {
 			throw new Exception("Problem creating SetContaminationClass:The argument cs is null.");
@@ -18,7 +19,7 @@ public class SetContaminationClass extends Event {
 	}
 
 	@Override
-	void execute(RoadMap map) {
+	public void execute(RoadMap map) {
 		try {
 		for(Pair<String, Integer> w: cs) {
 			if(map.getVehicle(w.getFirst()) == null) {
@@ -31,6 +32,15 @@ public class SetContaminationClass extends Event {
 			System.out.println(e.getMessage());
 		}
 
+	}
+	
+	@Override
+	public String toString() {
+		String result = "Set contamination classes: ";
+		for(Pair<String, Integer> w: cs) {
+			result += "vehicle '" + w.getFirst() + "' to '" + w.getSecond() +"', "; 
+		}
+		return result;
 	}
 
 }

@@ -1,7 +1,11 @@
-package simulator.model;
+package simulator.events;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import simulator.model.Junction;
+import simulator.model.RoadMap;
+import simulator.model.Vehicle;
 
 public class NewVehicleEvent extends Event {
 
@@ -19,7 +23,7 @@ public class NewVehicleEvent extends Event {
 	}
 
 	@Override
-	void execute(RoadMap map) {
+	public void execute(RoadMap map) {
 		try {
 			List<Junction> itinerary_j = new LinkedList<Junction>();
 			Junction j;
@@ -38,6 +42,11 @@ public class NewVehicleEvent extends Event {
 		} catch (Exception e) {
 			System.out.println("Problem executing NewVehicleEvent: " + e.getMessage());
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "New Vehicle '" + id + "'"; 
 	}
 
 }

@@ -1,6 +1,9 @@
-package simulator.model;
+package simulator.events;
 
 import simulator.exceptions.RoadCreationException;
+import simulator.model.CityRoad;
+import simulator.model.RoadMap;
+import simulator.model.Weather;
 
 public class NewCityRoadEvent extends NewRoadEvent {
 
@@ -11,7 +14,7 @@ public class NewCityRoadEvent extends NewRoadEvent {
 	}
 
 	@Override
-	void execute(RoadMap map) {
+	public void execute(RoadMap map) {
 		CityRoad cr;
 		try {
 			cr = new CityRoad(id, map.getJunction(srcJunc), map.getJunction(destJunc), maxSpeed,
@@ -20,5 +23,10 @@ public class NewCityRoadEvent extends NewRoadEvent {
 		} catch (RoadCreationException e) {
 			System.out.println("Problem executing NewCityRoadEvent: " + e.getMessage());
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "New City Road '" + id + "'"; 
 	}
 }

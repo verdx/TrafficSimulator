@@ -1,4 +1,6 @@
-package simulator.model;
+package simulator.events;
+
+import simulator.model.Weather;
 
 public abstract class NewRoadEvent extends Event{
 	

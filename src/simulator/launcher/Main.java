@@ -17,6 +17,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import simulator.control.Controller;
+import simulator.events.Event;
 import simulator.factories.Builder;
 import simulator.factories.BuilderBasedFactory;
 import simulator.factories.Factory;
@@ -31,9 +32,8 @@ import simulator.factories.RoundRobinStrategyBuilder;
 import simulator.factories.SetContClassEventBuilder;
 import simulator.factories.SetWeatherEventBuilder;
 import simulator.model.DequeuingStrategy;
-import simulator.model.Event;
 import simulator.model.LightSwitchingStrategy;
-import simulator.model.Simulator;
+import simulator.model.TrafficSimulator;
 
 
 public class Main {
@@ -154,7 +154,7 @@ public class Main {
 	}
 
 	private static void startBatchMode() throws IOException {
-		Simulator sim = new Simulator();
+		TrafficSimulator sim = new TrafficSimulator();
 		try {
 			Controller cont = new Controller(sim, _eventsFactory);
 			

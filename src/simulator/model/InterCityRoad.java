@@ -4,7 +4,7 @@ import simulator.exceptions.RoadCreationException;
 
 public class InterCityRoad extends Road {
 
-	InterCityRoad(String id, Junction srcJunc, Junction destJunc, int maxSpeed, int contLimit, int length,
+	public InterCityRoad(String id, Junction srcJunc, Junction destJunc, int maxSpeed, int contLimit, int length,
 			Weather weather) throws RoadCreationException {
 		super(id, srcJunc, destJunc, maxSpeed, contLimit, length, weather);
 	}

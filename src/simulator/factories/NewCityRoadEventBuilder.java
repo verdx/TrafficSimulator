@@ -3,8 +3,8 @@ package simulator.factories;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import simulator.model.Event;
-import simulator.model.NewCityRoadEvent;
+import simulator.events.Event;
+import simulator.events.NewCityRoadEvent;
 import simulator.model.Weather;
 
 public class NewCityRoadEventBuilder extends Builder<Event>{

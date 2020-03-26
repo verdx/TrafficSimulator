@@ -3,10 +3,10 @@ package simulator.factories;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import simulator.events.Event;
+import simulator.events.NewJunctionEvent;
 import simulator.model.DequeuingStrategy;
-import simulator.model.Event;
 import simulator.model.LightSwitchingStrategy;
-import simulator.model.NewJunctionEvent;
 
 public class NewJunctionEventBuilder extends Builder<Event>{
 

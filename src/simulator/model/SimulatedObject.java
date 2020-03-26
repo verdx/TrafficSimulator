@@ -2,7 +2,7 @@ package simulator.model;
 
 import org.json.JSONObject;
 
-public abstract class SimulatedObject {
+public abstract class SimulatedObject{
 
 	protected String _id;
 
@@ -19,7 +19,7 @@ public abstract class SimulatedObject {
 		return _id;
 	}
 
-	abstract void advance(int time);
+	abstract void advance(int time)  throws Exception;
 
 	abstract public JSONObject report();
 }

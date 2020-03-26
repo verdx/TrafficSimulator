@@ -1,8 +1,10 @@
-package simulator.model;
+package simulator.events;
 
 import java.util.List;
 
 import simulator.misc.Pair;
+import simulator.model.RoadMap;
+import simulator.model.Weather;
 
 public class SetWeatherEvent extends Event {
 	
@@ -18,7 +20,7 @@ public class SetWeatherEvent extends Event {
 	}
 
 	@Override
-	void execute(RoadMap map) {
+	public void execute(RoadMap map) {
 		try {
 		for(Pair<String, Weather> w: ws) {
 			if(map.getRoad(w.getFirst()) == null) {
@@ -31,6 +33,15 @@ public class SetWeatherEvent extends Event {
 			System.out.println(e.getMessage());
 		}
 
+	}
+	
+	@Override
+	public String toString() {
+		String result = "Set weather: ";
+		for(Pair<String, Weather> w: ws) {
+			result += "road '" + w.getFirst() + "' to '" + w.getSecond().toString() +"', "; 
+		}
+		return result;
 	}
 
 }

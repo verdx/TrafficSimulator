@@ -1,4 +1,6 @@
-package simulator.model;
+package simulator.events;
+
+import simulator.model.RoadMap;
 
 public abstract class Event implements Comparable<Event> {
 
@@ -11,7 +13,7 @@ public abstract class Event implements Comparable<Event> {
 			_time = time;
 	}
 
-	int getTime() {
+	public int getTime() {
 		return _time;
 	}
 
@@ -21,5 +23,5 @@ public abstract class Event implements Comparable<Event> {
 		return 0;
 	}
 
-	abstract void execute(RoadMap map);
+	public abstract void execute(RoadMap map);
 }

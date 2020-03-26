@@ -25,7 +25,7 @@ public class Vehicle extends SimulatedObject{
 	
 	
 
-	Vehicle(String id, int maxSpeed, int contClass,
+	public Vehicle(String id, int maxSpeed, int contClass,
 			List<Junction> itinerary) throws VehicleCreationException {
 			super(id);
 			if(maxSpeed < 0) {
@@ -108,7 +108,7 @@ public class Vehicle extends SimulatedObject{
 		}
 	}
 	
-	void setContaminationClass(int c) throws VehicleMethodException{
+	public void setContaminationClass(int c) throws VehicleMethodException{
 		if (c < 0 || c > 10) {
 			throw new VehicleMethodException("Setting contamination class, argument must be between 0 and 10.");
 		} else {
@@ -116,7 +116,7 @@ public class Vehicle extends SimulatedObject{
 		}
 	}
 	
-	void moveToNextRoad() throws Exception {
+	public void moveToNextRoad() throws Exception {
 		Road nextRoad;
 		if(nextJunction < itinerary.size()) {
 			if(status == VehicleStatus.PENDING) {
@@ -160,5 +160,9 @@ public class Vehicle extends SimulatedObject{
 
 	public List<Junction> getItinerary() {
 		return itinerary;
+	}
+	
+	public VehicleStatus getStatus() {
+		return status;
 	}
 }

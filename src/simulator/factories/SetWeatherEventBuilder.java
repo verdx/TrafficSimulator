@@ -6,9 +6,9 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import simulator.events.Event;
+import simulator.events.SetWeatherEvent;
 import simulator.misc.Pair;
-import simulator.model.Event;
-import simulator.model.SetWeatherEvent;
 import simulator.model.Weather;
 
 public class SetWeatherEventBuilder extends Builder<Event>{

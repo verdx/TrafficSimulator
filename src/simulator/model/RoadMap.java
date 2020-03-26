@@ -28,14 +28,14 @@ public class RoadMap {
 		reset();
 	}
 	
-	void addJunction(Junction j) {
+	public void addJunction(Junction j) {
 		if (!junctionsMap.containsKey(j._id)) {
 			junctions.add(j);
 			junctionsMap.put(j._id, j);
 		}
 	}
 	
-	void addRoad(Road r) {
+	public void addRoad(Road r) {
 		if (!roadsMap.containsKey(r._id) && junctionsMap.containsKey(r.getDestJunc()._id)
 				&& junctionsMap.containsKey(r.getSrcJunc()._id)) {
 			roads.add(r);
@@ -45,7 +45,7 @@ public class RoadMap {
 		}
 	}
 	
-	void addVehicle(Vehicle v) {
+	public void addVehicle(Vehicle v) {
 		if(canAddVehicle(v)) {
 			vehicles.add(v);
 			vehiclesMap.put(v._id, v);

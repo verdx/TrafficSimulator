@@ -22,7 +22,7 @@ public class Junction extends SimulatedObject {
 	private int y;
 	
 	
-	Junction(String id, LightSwitchingStrategy lsStrategy, DequeuingStrategy dqStrategy, int xCoor, int yCoor) throws JunctionCreationException {
+	public Junction(String id, LightSwitchingStrategy lsStrategy, DequeuingStrategy dqStrategy, int xCoor, int yCoor) throws JunctionCreationException {
 		super(id);
 		if (lsStrategy != null && dqStrategy != null) {
 			this.lsStrategy = lsStrategy;
@@ -45,7 +45,7 @@ public class Junction extends SimulatedObject {
 	}
 
 	@Override
-	void advance(int time) {
+	void advance(int time) throws Exception {
 				
 		if (currGreen != -1) {
 			List<Vehicle> toDequeue = dqStrategy.dequeue(queues.get(currGreen));
@@ -53,7 +53,7 @@ public class Junction extends SimulatedObject {
 				try {
 					v.moveToNextRoad();
 				} catch (Exception e) {
-					System.out.println("Problem advancing junction " + this._id + ": " + e.getMessage());
+					throw new Exception("Problem advancing junction " + this._id + ": " + e.getMessage());
 				}
 				queues.get(currGreen).remove(v);
 			}
@@ -116,5 +116,24 @@ public class Junction extends SimulatedObject {
 			throw new JunctionMethodException("Trying to add incoming road incorrectly");
 		}
 	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getGreenLightIndex() {
+		return currGreen;
+	}
+
+	public List<Road> getInRoads() {
+		return in_roads;
+	}
+	
+	
+	 
 
 }

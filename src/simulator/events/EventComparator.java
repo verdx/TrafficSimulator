@@ -1,4 +1,4 @@
-package simulator.model;
+package simulator.events;
 
 import java.util.Comparator;
 
