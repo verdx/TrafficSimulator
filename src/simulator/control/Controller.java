@@ -3,6 +3,7 @@ package simulator.control;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,8 +12,10 @@ import org.json.JSONTokener;
 
 import simulator.events.Event;
 import simulator.factories.Factory;
+import simulator.model.Road;
 import simulator.model.TrafficSimObserver;
 import simulator.model.TrafficSimulator;
+import simulator.model.Vehicle;
 
 public class Controller{
 	
@@ -67,5 +70,24 @@ public class Controller{
 	
 	public void addEvent(Event e) {
 		sim.addEvent(e);
+	}
+
+	public List<Vehicle> getVehicles() {
+		return sim.getVehicles();
+	}
+
+	public int getTime() {
+		return sim.getTime();
+	}
+
+	public List<Road> getRoads() {
+		return sim.getRoads();
+	}
+
+	public void run(int n) throws Exception{
+		for(int i = 0; i < n; i++) {
+			sim.advance();
+		}
+		
 	}
 }

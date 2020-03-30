@@ -17,6 +17,7 @@ import simulator.control.Controller;
 
 public class MainWindow extends JFrame {
 	
+	private static final long serialVersionUID = 1L;
 	private Controller _ctrl;
 	
 	public MainWindow(Controller ctrl) {

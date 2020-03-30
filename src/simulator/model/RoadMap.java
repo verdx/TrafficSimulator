@@ -114,6 +114,16 @@ public class RoadMap {
 		return Collections.unmodifiableList(new ArrayList<>(vehicles));
 	}
 	
+	//Alomejor no hace falta, borrar si se ve bien
+	//el spinner de vehiculos en la ventana de cambiar clase de Co2
+	public List<String> getVehiclesIds() {
+		List<String> ids = new ArrayList<>();
+		for(Vehicle v: vehicles) {
+			ids.add(v._id);
+		}
+		return Collections.unmodifiableList(ids);
+	}
+	
 	public void reset() {
 		junctions = new LinkedList<Junction>();
 		roads = new LinkedList<Road>();
