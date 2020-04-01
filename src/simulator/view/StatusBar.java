@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 import simulator.control.Controller;
 import simulator.events.Event;
@@ -29,6 +31,10 @@ public class StatusBar extends JPanel implements TrafficSimObserver{
 		ticksText.setSize(20, this.getHeight());
 		
 		eventsText = new JTextArea();
+		
+		this.add(ticksText);
+		this.add(new JSeparator(SwingConstants.VERTICAL));
+		this.add(eventsText);
 	}
 	
 	public void onAdvanceStart(RoadMap map​, List<Event> events, int time​) {

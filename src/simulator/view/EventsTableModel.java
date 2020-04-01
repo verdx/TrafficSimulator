@@ -1,18 +1,23 @@
-package extra.jtable;
+package simulator.view;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import extra.jtable.EventEx;
+import simulator.events.Event;
+import simulator.model.RoadMap;
+import simulator.model.TrafficSimObserver;
 
-public class EventsTableModel extends AbstractTableModel {
+
+public class EventsTableModel extends AbstractTableModel implements TrafficSimObserver{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
+
+
 	private List<EventEx> _events;
 	private String[] _colNames = { "#", "Time", "Priority" };
 
@@ -24,11 +29,11 @@ public class EventsTableModel extends AbstractTableModel {
 		// observar que si no refresco la tabla no se carga
 		// La tabla es la represantación visual de una estructura de datos,
 		// en este caso de un ArrayList, hay que notificar los cambios.
-		
+
 		// We need to notify changes, otherwise the table does not refresh.
-		fireTableDataChanged();;		
+		fireTableDataChanged();	
 	}
-	
+
 	public void setEventsList(List<EventEx> events) {
 		_events = events;
 		update();
@@ -85,4 +90,11 @@ public class EventsTableModel extends AbstractTableModel {
 		}
 		return s;
 	}
+
+	public void onAdvanceStart(RoadMap map​, List<Event> events, int time​) {}
+	public void onAdvanceEnd(RoadMap map​, List<Event> events, int time​) {}
+	public void onEventAdded(RoadMap map​, List<Event> events​, Event e, int time​) {}
+	public void onReset(RoadMap map​, List<Event> events​, int time​) {}
+	public void onRegister(RoadMap map​, List<Event> events, int time​) {}
+	public void onError(String error) {}
 }

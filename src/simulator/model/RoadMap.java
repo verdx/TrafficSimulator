@@ -103,16 +103,19 @@ public class RoadMap {
 	}
 	
 	public List<Junction> getJunctions() {
-		return Collections.unmodifiableList(new ArrayList<>(junctions));
+		//return Collections.unmodifiableList(new ArrayList<>(junctions));
+		return (new ArrayList<Junction>(junctions));
 	}
 	
 	public List<Road> getRoads() {
-		return Collections.unmodifiableList(new ArrayList<>(roads));
+		//return Collections.unmodifiableList(new ArrayList<>(roads));
+		return (new ArrayList<Road>(roads));
 	}
 	
 	public List<Vehicle> getVehicles() {
-		return Collections.unmodifiableList(new ArrayList<>(vehicles));
-	}
+		//return Collections.unmodifiableList(new ArrayList<>(vehicles));
+		return (new ArrayList<Vehicle>(vehicles));	
+		}
 	
 	//Alomejor no hace falta, borrar si se ve bien
 	//el spinner de vehiculos en la ventana de cambiar clase de Co2

@@ -1,13 +1,17 @@
 package simulator.view;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -50,7 +54,6 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		_stopped = true;
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		
 		//Carga de ficheros
 		cargaFicheros = new JButton();
 		cargaFicheros.addActionListener(new ActionListener() {
@@ -64,6 +67,10 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 				});
 			}	
 		});
+		cargaFicheros.setBounds(0, 0, 50, 50);
+		cargaFicheros.setIcon(new ImageIcon("icons/open.png"));
+		
+		
 		cargaFicheros.setVisible(true);
 		
 		//Cambio clase de contaminacion
@@ -79,6 +86,8 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 				});
 			}
 		});
+		cambiarClaseCont.setIcon(new ImageIcon("icons/co2class.png"));
+		cambiarClaseCont.setVisible(true);
 		
 		//Cambiar weather de una carretera
 		cambiarWeather = new JButton();
@@ -93,6 +102,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 				});
 			}	
 		});
+		cambiarWeather.setVisible(true);
 		
 		//TicksSpinner
 		SpinnerNumberModel ticksSpinnerNM = new SpinnerNumberModel(1, 1, 1000, 1);
@@ -107,6 +117,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 				run_sim(ticksSpinnerNM.getNumber().intValue());
 			}
 		});
+		runButton.setVisible(true);
 		
 		//StopButton
 		stopButton = new JButton();
@@ -116,6 +127,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 				stop();
 			}
 		});
+		stopButton.setVisible(true);
 		
 		//ExitProgram
 		exitButton = new JButton();
@@ -129,6 +141,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 				    }
 			}
 		});
+		exitButton.setVisible(true);
 		
 
 		this.add(cargaFicheros);
