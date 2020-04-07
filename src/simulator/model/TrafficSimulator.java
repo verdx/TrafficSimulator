@@ -1,10 +1,13 @@
 package simulator.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import org.json.JSONObject;
 
+import extra.jtable.EventEx;
 import simulator.events.Event;
 import simulator.events.EventComparator;
 import simulator.misc.SortedArrayList;
@@ -38,12 +41,14 @@ public class TrafficSimulator implements Observable<TrafficSimObserver>{
 		//Ejecutar eventos
 		Iterator<Event> evItr = events.iterator();
 
-		
 		Event e;
 		int eTime = 0;
 		while(evItr.hasNext() && eTime <= this._time) {
 			e = evItr.next();
-			if (e.getTime() == this._time) e.execute(roadMap);
+			if (e.getTime() == this._time) { 
+				e.execute(roadMap);
+				evItr.remove();
+			}
 			eTime = e.getTime();
 		}
 		
@@ -74,6 +79,7 @@ public class TrafficSimulator implements Observable<TrafficSimObserver>{
 		_time = 0;
 		roadMap = new RoadMap();
 		events = new SortedArrayList<Event>(new EventComparator());
+		observers = new ArrayList<TrafficSimObserver>();
 	}
 	
 	public void reset() {
@@ -81,7 +87,8 @@ public class TrafficSimulator implements Observable<TrafficSimObserver>{
 		roadMap.reset();
 		events.clear();
 		for(TrafficSimObserver o: observers) {
-			o.onReset(roadMap, events, _time);
+			if(o != null)
+				o.onReset(roadMap, events, _time);
 		}
 	}
 	
@@ -118,4 +125,13 @@ public class TrafficSimulator implements Observable<TrafficSimObserver>{
 	public List<Road> getRoads() {
 		return roadMap.getRoads();
 	}
+
+	public List<Event> getEvents() {
+		return Collections.unmodifiableList(new ArrayList<Event>(events));
+	}
+
+	public List<Junction> getJunctions() {
+		return roadMap.getJunctions();
+	}
+
 }

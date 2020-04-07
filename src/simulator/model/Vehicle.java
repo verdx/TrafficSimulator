@@ -165,4 +165,19 @@ public class Vehicle extends SimulatedObject{
 	public VehicleStatus getStatus() {
 		return status;
 	}
+
+
+	public int getMaxSpeed() {
+		return maxSpeed;
+	}
+
+
+	public int getTotalCo2() {
+		return contTotal;
+	}
+
+
+	public Object getDistance() {
+		return distTotal;
+	}
 }

@@ -103,18 +103,18 @@ public class RoadMap {
 	}
 	
 	public List<Junction> getJunctions() {
-		//return Collections.unmodifiableList(new ArrayList<>(junctions));
-		return (new ArrayList<Junction>(junctions));
+		return Collections.unmodifiableList(new ArrayList<>(junctions));
+		//return (new ArrayList<Junction>(junctions));
 	}
 	
 	public List<Road> getRoads() {
-		//return Collections.unmodifiableList(new ArrayList<>(roads));
-		return (new ArrayList<Road>(roads));
+		return Collections.unmodifiableList(new ArrayList<>(roads));
+		//return (new ArrayList<Road>(roads));
 	}
 	
 	public List<Vehicle> getVehicles() {
-		//return Collections.unmodifiableList(new ArrayList<>(vehicles));
-		return (new ArrayList<Vehicle>(vehicles));	
+		return Collections.unmodifiableList(new ArrayList<>(vehicles));
+		//return (new ArrayList<Vehicle>(vehicles));	
 		}
 	
 	//Alomejor no hace falta, borrar si se ve bien

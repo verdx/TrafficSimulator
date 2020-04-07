@@ -132,6 +132,14 @@ public class Junction extends SimulatedObject {
 	public List<Road> getInRoads() {
 		return in_roads;
 	}
+
+	public String getQueues() {
+		String result = "";
+		for(Road r: in_roads) {
+			result += r.getId() + ":" + queueByRoad.get(r).toString() + " ";
+		}
+		return result;
+	}
 	
 	
 	 

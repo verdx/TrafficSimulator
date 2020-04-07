@@ -147,4 +147,18 @@ public abstract class Road extends SimulatedObject {
 		return contLimit;
 	}
 
+
+	public  Weather getWeather() {
+		return weather;
+	}
+
+
+	public int getMaxSpeed() {
+		return maxSpeed;
+	}
+	
+	public int getSpeedLimit() {
+		return speedLimit;
+	}
+
 }

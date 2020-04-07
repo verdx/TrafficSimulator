@@ -36,10 +36,11 @@ public class SetContClassEvent extends Event {
 	
 	@Override
 	public String toString() {
-		String result = "Set contamination classes: ";
+		String result = "Change CO2 Class: [";
 		for(Pair<String, Integer> w: cs) {
-			result += "vehicle '" + w.getFirst() + "' to '" + w.getSecond() +"', "; 
+			result += "(" + w.getFirst() + ", " + w.getSecond() +"), "; 
 		}
+		result += "]";
 		return result;
 	}
 

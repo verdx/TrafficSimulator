@@ -4,37 +4,31 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import extra.jtable.EventEx;
+import simulator.control.Controller;
 import simulator.events.Event;
 import simulator.model.RoadMap;
 import simulator.model.TrafficSimObserver;
 
 
-public class EventsTableModel extends AbstractTableModel implements TrafficSimObserver{
+public class EventsTable extends AbstractTableModel implements TrafficSimObserver{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 
-	private List<EventEx> _events;
-	private String[] _colNames = { "#", "Time", "Priority" };
+	private List<Event> _events;
+	private String[] _colNames = {"Time", "Description" };
 
-	public EventsTableModel() {
-		_events=null;
+
+	public EventsTable(Controller ctrl) {
+		_events = ctrl.getEvents();
+		ctrl.addObserver(this);
 	}
 
 	public void update() {
-		// observar que si no refresco la tabla no se carga
-		// La tabla es la represantación visual de una estructura de datos,
-		// en este caso de un ArrayList, hay que notificar los cambios.
-
-		// We need to notify changes, otherwise the table does not refresh.
 		fireTableDataChanged();	
 	}
 
-	public void setEventsList(List<EventEx> events) {
+	public void setEventsList(List<Event> events) {
 		_events = events;
 		update();
 	}
@@ -44,9 +38,6 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 		return false;
 	}
 
-	//si no pongo esto no coge el nombre de las columnas
-	//
-	//this is for the column header
 	@Override
 	public String getColumnName(int col) {
 		return _colNames[col];
@@ -79,22 +70,25 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 		Object s = null;
 		switch (columnIndex) {
 		case 0:
-			s = rowIndex;
-			break;
-		case 1:
 			s = _events.get(rowIndex).getTime();
 			break;
-		case 2:
-			s = _events.get(rowIndex).getPriority();
+		case 1:
+			s = _events.get(rowIndex).toString();
 			break;
 		}
 		return s;
 	}
 
 	public void onAdvanceStart(RoadMap map​, List<Event> events, int time​) {}
-	public void onAdvanceEnd(RoadMap map​, List<Event> events, int time​) {}
-	public void onEventAdded(RoadMap map​, List<Event> events​, Event e, int time​) {}
-	public void onReset(RoadMap map​, List<Event> events​, int time​) {}
+	public void onAdvanceEnd(RoadMap map​, List<Event> events, int time​) {
+		setEventsList(events);
+	}
+	public void onEventAdded(RoadMap map​, List<Event> events, Event e, int time​) {
+		setEventsList(events);
+	}
+	public void onReset(RoadMap map​, List<Event> events, int time​) {
+		setEventsList(events);
+	}
 	public void onRegister(RoadMap map​, List<Event> events, int time​) {}
 	public void onError(String error) {}
 }

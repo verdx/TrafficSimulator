@@ -19,7 +19,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
-import simulator.view.EventsTableModel;
+import simulator.view.EventsTable;
 
 import javax.swing.border.Border;
 

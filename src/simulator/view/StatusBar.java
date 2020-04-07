@@ -24,6 +24,7 @@ public class StatusBar extends JPanel implements TrafficSimObserver{
 	public StatusBar(Controller ctrl) {
 		super();
 		_ctrl = ctrl;
+		_ctrl.addObserver(this);
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
@@ -38,12 +39,12 @@ public class StatusBar extends JPanel implements TrafficSimObserver{
 	}
 	
 	public void onAdvanceStart(RoadMap map​, List<Event> events, int time​) {
-		ticksText.setText("" + _ctrl.getTime());
+		ticksText.setText("Time: " + _ctrl.getTime());
 		eventsText.setText("");
 	}
 	public void onAdvanceEnd(RoadMap map​, List<Event> events, int time​) {}
 	public void onEventAdded(RoadMap map​, List<Event> events​, Event e, int time​) {
-		eventsText.setText(e.toString());
+		eventsText.setText( "Event added: " + e.toString());
 	}
 	public void onReset(RoadMap map​, List<Event> events​, int time​) {
 		ticksText.setText("");

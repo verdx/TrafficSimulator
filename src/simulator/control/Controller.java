@@ -10,8 +10,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import extra.jtable.EventEx;
 import simulator.events.Event;
 import simulator.factories.Factory;
+import simulator.model.Junction;
 import simulator.model.Road;
 import simulator.model.TrafficSimObserver;
 import simulator.model.TrafficSimulator;
@@ -88,5 +90,13 @@ public class Controller{
 		for(int i = 0; i < n; i++) {
 			sim.advance();
 		}
+	}
+
+	public List<Event> getEvents() {
+		return sim.getEvents();
+	}
+
+	public List<Junction> getJunctions() {
+		return sim.getJunctions();
 	}
 }
