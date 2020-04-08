@@ -59,15 +59,14 @@ public class MainWindow extends JFrame {
 		JPanel junctionsView = createViewPanel(new JTable(new JunctionsTable(_ctrl)), "Junctions");
 		junctionsView.setPreferredSize(new Dimension(500,200));
 		tablesPanel.add(junctionsView);
-		//TODO add other tables
-		//...
 
 		//maps
-		//JPanel mapView = createViewPanel(new MapComponent(_ctrl), "Map");
-		//mapView.setPreferredSize(new Dimension(500, 400));
-		//mapsPanel.add(mapView);
-		//TODO add a map for MapByComponent
-		//...
+		JPanel mapView = createViewPanel(new MapComponent(_ctrl), "Map");
+		mapView.setPreferredSize(new Dimension(500, 400));
+		mapsPanel.add(mapView);
+		
+		JPanel mapByRoadView = createViewPanel(new MapByRoadComponent(_ctrl), "Map By Road");
+		mapsPanel.add(mapByRoadView);
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();
