@@ -22,7 +22,6 @@ public class VehiclesTable extends AbstractTableModel implements TrafficSimObser
 
 
 	public VehiclesTable(Controller ctrl) {
-		_vehicles = ctrl.getVehicles();
 		ctrl.addObserver(this);
 	}
 

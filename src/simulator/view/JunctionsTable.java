@@ -20,7 +20,6 @@ public class JunctionsTable extends AbstractTableModel implements TrafficSimObse
 
 
 	public JunctionsTable(Controller ctrl) {
-		_junctions = ctrl.getJunctions();
 		ctrl.addObserver(this);
 	}
 
@@ -76,7 +75,9 @@ public class JunctionsTable extends AbstractTableModel implements TrafficSimObse
 		return s;
 	}
 
-	public void onAdvanceStart(RoadMap map​, List<Event> events, int time​) {}
+	public void onAdvanceStart(RoadMap map, List<Event> events, int time​) {
+		setJunctionsList(map.getJunctions());
+	}
 	public void onAdvanceEnd(RoadMap map, List<Event> events, int time​) {
 		setJunctionsList(map.getJunctions());
 	}
@@ -84,6 +85,8 @@ public class JunctionsTable extends AbstractTableModel implements TrafficSimObse
 	public void onReset(RoadMap map, List<Event> events, int time​) {
 		setJunctionsList(map.getJunctions());
 	}
-	public void onRegister(RoadMap map​, List<Event> events, int time​) {}
+	public void onRegister(RoadMap map, List<Event> events, int time​) {
+		setJunctionsList(map.getJunctions());
+	}
 	public void onError(String error) {}
 }

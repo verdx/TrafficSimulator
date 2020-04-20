@@ -17,6 +17,7 @@ public class EventsTable extends AbstractTableModel implements TrafficSimObserve
 
 	private List<Event> _events;
 	private String[] _colNames = {"Time", "Description" };
+	private RoadMap _map;
 
 
 	public EventsTable(Controller ctrl) {

@@ -10,14 +10,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import extra.jtable.EventEx;
 import simulator.events.Event;
 import simulator.factories.Factory;
-import simulator.model.Junction;
-import simulator.model.Road;
 import simulator.model.TrafficSimObserver;
 import simulator.model.TrafficSimulator;
-import simulator.model.Vehicle;
 
 public class Controller{
 
@@ -70,20 +66,8 @@ public class Controller{
 		sim.removeObserver(o);
 	}
 
-	public void addEvent(Event e) {
-		sim.addEvent(e);
-	}
-
-	public List<Vehicle> getVehicles() {
-		return sim.getVehicles();
-	}
-
-	public int getTime() {
-		return sim.getTime();
-	}
-
-	public List<Road> getRoads() {
-		return sim.getRoads();
+	public void addEvent(Event event) {
+		sim.addEvent(event);
 	}
 
 	public void run(int n) throws Exception{
@@ -96,7 +80,4 @@ public class Controller{
 		return sim.getEvents();
 	}
 
-	public List<Junction> getJunctions() {
-		return sim.getJunctions();
-	}
 }

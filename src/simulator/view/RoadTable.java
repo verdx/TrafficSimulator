@@ -21,7 +21,6 @@ public class RoadTable extends AbstractTableModel implements TrafficSimObserver{
 
 
 	public RoadTable(Controller ctrl) {
-		_roads = ctrl.getRoads();
 		ctrl.addObserver(this);
 	}
 
