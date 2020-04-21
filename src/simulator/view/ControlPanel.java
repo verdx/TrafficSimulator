@@ -4,14 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,7 +16,6 @@ import javax.swing.JSpinner;
 import javax.swing.JToolBar;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import simulator.control.Controller;
 import simulator.events.Event;
@@ -35,28 +31,32 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 	private RoadMap _map;
 	private int _time;
 	
-	private boolean _stopped;
-	
 	private JToolBar toolBar;
-	private JFileChooser jsonChooser;
 	private JButton cargaFicheros;
 	private JButton cambiarClaseCont;
 	private JButton cambiarWeather;
+	private SpinnerNumberModel ticksSpinnerNM;
 	private JSpinner ticksSpinner;
 	private JButton runButton;
 	private JButton stopButton;
 	private JButton exitButton;
+	private MainWindow _mw;
 	
 	
 
-	public ControlPanel(Controller ctrl) {
+	public ControlPanel(Controller ctrl, MainWindow mw) {
 		super();
 		_ctrl = ctrl;
+		_mw = mw;
 		_ctrl.addObserver(this);
-		_stopped = true;
+		
+		initGUI();
+
+	}		
+	
+	private void initGUI() {
 		this.setLayout(new BorderLayout());
 		toolBar = new JToolBar();
-		jsonChooser = new JFileChooser();
 
 		//Carga de ficheros
 		cargaFicheros = new JButton();
@@ -66,7 +66,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						cargaFicherosPulsado();
+						_mw.cargaFicherosPulsado();
 					}
 				});
 			}	
@@ -84,7 +84,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						cambiarClaseContPulsado();
+						_mw.cambiarClaseContPulsado(_map.getVehicles(), _time);
 					}
 				});
 			}
@@ -100,7 +100,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						cambiarWeatherPulsado();
+						_mw.cambiarWeatherPulsado(_map.getRoads(), _time);
 					}
 				});
 			}	
@@ -110,7 +110,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 
 		//TicksSpinner
 		JLabel ticksText = new JLabel("Ticks: ");
-		SpinnerNumberModel ticksSpinnerNM = new SpinnerNumberModel(1, 1, 1000, 1);
+		ticksSpinnerNM = new SpinnerNumberModel(1, 1, 1000, 1);
 		ticksSpinner = new JSpinner(ticksSpinnerNM);
 		int w = ticksSpinner.getWidth();   
 		int h = ticksSpinner.getHeight();
@@ -124,8 +124,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setEnabled(false);
-				_stopped = false;
-				run_sim(ticksSpinnerNM.getNumber().intValue());
+				_mw.runSimGeneral();
 			}
 		});
 		runButton.setIcon(new ImageIcon("resources/icons/run.png"));
@@ -136,7 +135,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		stopButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				stop();
+				_mw.stop();
 			}
 		});
 		stopButton.setIcon(new ImageIcon("resources/icons/stop.png"));
@@ -156,7 +155,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		});
 		exitButton.setIcon(new ImageIcon("resources/icons/exit.png"));
 		exitButton.setVisible(true);
-		
+
 
 
 		toolBar.add(cargaFicheros);
@@ -173,12 +172,9 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		toolBar.add(exitButton);
 		this.add(toolBar, BorderLayout.CENTER);
 
+	}
 
-
-
-	}		
-
-	private void enableToolBar(boolean bool) {
+	void enableToolBar(boolean bool) {
 		cargaFicheros.setEnabled(bool);
 		cambiarClaseCont.setEnabled(bool);
 		cambiarWeather.setEnabled(bool);
@@ -186,81 +182,39 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		runButton.setEnabled(bool);
 	}
 
-	private void run_sim(int n) {
-		if (n > 0 && !_stopped) {
-			try {
-				enableToolBar(false);
-				_ctrl.run(1);
-				SwingUtilities.invokeLater(new Runnable() {
-					@Override
-					public void run() {
-						run_sim(n - 1);
-					}
-				});
-			} catch (Exception e​) {
-				// ​TODO​ show error message
-				_stopped = true;
-				return;
-			}
-			
-		} else {
-			enableToolBar(true);
-			_stopped = true;
-		}
+	int getTicks() {
+		return ticksSpinnerNM.getNumber().intValue();
 	}
 
-	private void stop() {
-		_stopped = true;
-	}
-
-	private void cargaFicherosPulsado() {
-		
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON files", "json");
-		jsonChooser.setFileFilter(filter);
-		int returnVal = jsonChooser.showOpenDialog(this);
-		try {
-			if(returnVal != JFileChooser.APPROVE_OPTION)
-				throw new FileNotFoundException();
-			_ctrl.reset();
-			_ctrl.loadEvents(new FileInputStream(jsonChooser.getSelectedFile()));
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Error retrieving events from file: " + e.getMessage());
-			e.printStackTrace();
-		}
-	}
-
-	private void cambiarClaseContPulsado() {
-		new ClaseContDialog(_ctrl, _map.getVehicles(), _time);
-	}
-
-	private void cambiarWeatherPulsado() {
-		new ChangeWeatherDialog(_ctrl, _map.getRoads(), _time);
-
-	}
-
+	@Override
 	public void onAdvanceStart(RoadMap map, List<Event> events, int time) {
 		_map = map;
 		_time = time;
 	}
+	@Override
 	public void onAdvanceEnd(RoadMap map, List<Event> events, int time) {
 		_map = map;
 		_time = time;
 	}
+	@Override
 	public void onEventAdded(RoadMap map, List<Event> events​, Event e, int time) {
 		_map = map;
 		_time = time;
 	}
+	@Override
 	public void onReset(RoadMap map, List<Event> events​, int time) {
 		enableToolBar(true);
 		_map = map;
 		_time = time;
 	}
+	@Override
 	public void onRegister(RoadMap map, List<Event> events, int time) {
 		_map = map;
 		_time = time;
 	}
+	@Override
 	public void onError(String err​) {
-		_stopped = true;
+		_mw.stop();
 		enableToolBar(true);
 	}
 }
