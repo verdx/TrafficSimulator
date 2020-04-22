@@ -20,7 +20,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import simulator.control.Controller;
+import simulator.events.Event;
+import simulator.model.Junction;
 import simulator.model.Road;
+import simulator.model.RoadMap;
 import simulator.model.Vehicle;
 
 public class MainWindow extends JFrame {
@@ -44,6 +47,8 @@ public class MainWindow extends JFrame {
 		 
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		this.setContentPane(mainPanel);
+		this.setLocation(200, 100);
+		
 		this.setJMenuBar(new TopMenuBar(_ctrl, this));
 		contPanel = new ControlPanel(_ctrl, this);
 		mainPanel.add(contPanel, BorderLayout.PAGE_START);
@@ -61,19 +66,19 @@ public class MainWindow extends JFrame {
 		viewsPanel.add(mapsPanel);
 
 		//tables
-		JPanel eventsView = createViewPanel(new JTable(new EventsTable(_ctrl)), "Events");
+		JPanel eventsView = createViewPanel(new JTable(createEventsTable()), "Events");
 		eventsView.setPreferredSize(new Dimension(500, 200));
 		tablesPanel.add(eventsView);
 		
-		JPanel vehiclesView = createViewPanel(new JTable(new VehiclesTable(_ctrl)), "Vehicles");
+		JPanel vehiclesView = createViewPanel(new JTable(createVehiclesTable()), "Vehicles");
 		vehiclesView.setPreferredSize(new Dimension(500, 200));
 		tablesPanel.add(vehiclesView);
 		
-		JPanel roadsView = createViewPanel(new JTable(new RoadTable(_ctrl)), "Roads");
+		JPanel roadsView = createViewPanel(new JTable(createRoadsTable()), "Roads");
 		roadsView.setPreferredSize(new Dimension(500,200));
 		tablesPanel.add(roadsView);
 		
-		JPanel junctionsView = createViewPanel(new JTable(new JunctionsTable(_ctrl)), "Junctions");
+		JPanel junctionsView = createViewPanel(new JTable(createJunctionsTable()), "Junctions");
 		junctionsView.setPreferredSize(new Dimension(500,200));
 		tablesPanel.add(junctionsView);
 
@@ -89,6 +94,168 @@ public class MainWindow extends JFrame {
 		this.pack();
 		this.setVisible(true);
 	}
+	
+	private Table<Event> createEventsTable() {
+		String[] colNames = {"Time", "Description" };
+		Table<Event> eventsTable = new Table<Event>(_ctrl, colNames) {
+
+			@Override
+			public void setContentsList(RoadMap map, List<Event> events) {
+				_contents = events;
+				update();	
+			}
+
+			@Override
+			public Object getValueAt(int rowIndex, int columnIndex) {
+				Object s = null;
+				switch (columnIndex) {
+				case 0:
+					s = _contents.get(rowIndex).getTime();
+					break;
+				case 1:
+					s = _contents.get(rowIndex).toString();
+					break;
+				}
+				return s;
+			}
+			
+		};
+		eventsTable.setContentsList(null, _ctrl.getEvents());
+		return eventsTable;
+	}
+	
+	private Table<Vehicle> createVehiclesTable() {
+		String[] colNames  = {"Id", "Location", "Itinerary", 
+				"CO2 Class", "Max. Speed", "Speed", "Total CO2", "Distance"};
+		Table<Vehicle> vehiclesTable = new Table<Vehicle>(_ctrl, colNames) {
+
+			@Override
+			public void setContentsList(RoadMap map, List<Event> events) {
+				_contents = map.getVehicles();
+				update();	
+			}
+
+			@Override
+			public Object getValueAt(int rowIndex, int columnIndex) {
+				Object s = null;
+				Vehicle v = _contents.get(rowIndex);
+				switch (columnIndex) {
+				case 0:
+					s = v.getId();
+					break;
+				case 1:
+					s = v.getRoad() + ":" + v.getLocation();
+					break;
+				case 2:
+					s = v.getItinerary();
+					break;
+				case 3:
+					s = v.getContClass();
+					break;
+				case 4:
+					s = v.getMaxSpeed();
+					break;
+				case 5:
+					s = v.getSpeed();
+					break;
+				case 6:
+					s = v.getTotalCo2();
+					break;
+				case 7:
+					s = v.getDistance();
+					break;
+				}
+				return s;
+			}
+			
+		};
+		return vehiclesTable;
+		
+	}
+	
+	private Table<Junction> createJunctionsTable() {
+		String[] colNames = {"Id","Green", "Queues"};
+		Table<Junction> junctionsTable = new Table<Junction>(_ctrl, colNames) {
+
+			@Override
+			public void setContentsList(RoadMap map, List<Event> events) {
+				_contents = map.getJunctions();
+				update();	
+			}
+
+			@Override
+			public Object getValueAt(int rowIndex, int columnIndex) {
+				Object s = null;
+				Junction j = _contents.get(rowIndex);
+				switch (columnIndex) {
+				case 0:
+					s = j.getId();
+					break;
+				case 1:
+					if(j.getGreenLightIndex() == -1) {
+						s = "NONE";
+					} else {
+						s = j.getInRoads().get(j.getGreenLightIndex());	
+					}
+					break;
+				case 2:
+					s = j.getQueues();
+					break;
+				}
+				return s;
+			}
+			
+		};
+		return junctionsTable;
+	}
+	
+	private Table<Road> createRoadsTable() {
+		String[] colNames = {"Id", "Length", "Weather", 
+				"Max. Speed", "Speed Limit", "Total CO2", "CO2 Limit"};
+		Table<Road> roadsTable = new Table<Road>(_ctrl, colNames) {
+
+			@Override
+			public void setContentsList(RoadMap map, List<Event> events) {
+				_contents = map.getRoads();
+				update();	
+			}
+
+			@Override
+			public Object getValueAt(int rowIndex, int columnIndex) {
+				Object s = null;
+				Road r = _contents.get(rowIndex);
+				switch (columnIndex) {
+				case 0:
+					s = r.getId();
+					break;
+				case 1:
+					s = r.getLength();
+					break;
+				case 2:
+					s = r.getWeather();
+					break;
+				case 3:
+					s = r.getMaxSpeed();
+					break;
+				case 4:
+					s = r.getSpeedLimit();
+					break;
+				case 5:
+					s = r.getTotalCO2();
+					break;
+				case 6:
+					s = r.getCO2Limit();
+					break;
+				}
+				return s;
+			}
+			
+		};
+		return roadsTable;
+	}
+	
+	
+	
 
 	private JPanel createViewPanel(JComponent c, String title) {
 		JPanel p = new JPanel( new BorderLayout());

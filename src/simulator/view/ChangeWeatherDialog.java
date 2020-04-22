@@ -1,5 +1,8 @@
 package simulator.view;
 
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.border.EmptyBorder;
 
 import simulator.control.Controller;
 import simulator.events.Event;
@@ -30,16 +34,36 @@ public class ChangeWeatherDialog extends JDialog{
 		super();
 		this.setTitle("Change Road Weather");
 
+		//Set Location and Size
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		int width = 800;
+		int height = 150;
+		int x = (dim.width-width)/2;
+		int y = (dim.height-height)/2;
+		this.setLocation(x, y);
+		this.setPreferredSize(new Dimension(width, height));
+
+
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		this.setContentPane(mainPanel);
 
+		
+		//TOP PANEL
+		JPanel topPanel = new JPanel(new GridLayout());
 		JLabel explanationText = new JLabel("Schedule an event to change the weather of a road after a given number of simulation ticks from now.");
-		this.add(explanationText);
+		explanationText.setPreferredSize(new Dimension(width, height/3));
+		topPanel.add(explanationText);
+		topPanel.setBorder(new EmptyBorder(10,10,10,10));
 
+		
+		//MIDDLE PANEL
 		JPanel middlePanel = new JPanel();
 		middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.X_AXIS));
+		middlePanel.setPreferredSize(new Dimension(width, height/3));
+		middlePanel.setBorder(new EmptyBorder(10,10,10,10));
 
+		//Road
 		JLabel roadText = new JLabel("Road: ");
 		middlePanel.add(roadText);
 
@@ -47,32 +71,35 @@ public class ChangeWeatherDialog extends JDialog{
 		for(Road r: roads) {
 			roadDropList.addItem(r);
 		}
+		roadDropList.setMaximumSize(new Dimension(width, 30));
 		middlePanel.add(roadDropList);
 
+		//Weather
 		JLabel weatherText = new JLabel("Weather: ");
 		middlePanel.add(weatherText);
 
-		//SpinnerListModel weatherSpinnerNM = new SpinnerListModel(Weather.values());
-		//JSpinner weatherSpinner = new JSpinner(weatherSpinnerNM);
-		//middlePanel.add(weatherSpinner);
 		JComboBox<Weather> weatherDropList = new JComboBox<Weather>();
 		for(Weather w: Weather.values()) {
 			weatherDropList.addItem(w);
 		}
+		weatherDropList.setMaximumSize(new Dimension(width, 30));
 		middlePanel.add(weatherDropList);
 
+		//Ticks
 		JLabel TicksText = new JLabel("Ticks: ");
 		middlePanel.add(TicksText);
 
-		SpinnerNumberModel TicksSpinnerNM = new SpinnerNumberModel(1,1,100,1);
-		JSpinner TicksSpinner = new JSpinner(TicksSpinnerNM);
-		middlePanel.add(TicksSpinner);
+		SpinnerNumberModel ticksSpinnerNM = new SpinnerNumberModel(1,1,100,1);
+		JSpinner ticksSpinner = new JSpinner(ticksSpinnerNM);
+		ticksSpinner.setMaximumSize(new Dimension(width, 30));
+		middlePanel.add(ticksSpinner);
 
-		this.add(middlePanel);
-
-		JPanel lowerPanel = new JPanel();
-		lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.X_AXIS));
-
+		//LOWER PANEL
+		JPanel lowerPanelContainer = new JPanel();
+		lowerPanelContainer.setLayout(new GridLayout(1, 2, 10, 10));
+		lowerPanelContainer.setMaximumSize(new Dimension(width/3, height/3));
+		lowerPanelContainer.setBorder(new EmptyBorder(10,10,10,10));
+		
 		JButton cancel = new JButton("Cancel");
 		cancel.addActionListener(new ActionListener() {
 			@Override
@@ -80,7 +107,8 @@ public class ChangeWeatherDialog extends JDialog{
 				dispose();
 			}
 		});
-		lowerPanel.add(cancel);
+		cancel.setPreferredSize(new Dimension(height/3-20, width/6-10));
+		lowerPanelContainer.add(cancel);
 
 		JButton ok = new JButton("Ok");
 		ok.addActionListener(new ActionListener() {
@@ -95,7 +123,7 @@ public class ChangeWeatherDialog extends JDialog{
 				} else {
 					String roadId = ((Road) road).getId();
 					Weather weather = (Weather) weatherObj;
-					int ticks = TicksSpinnerNM.getNumber().intValue();
+					int ticks = ticksSpinnerNM.getNumber().intValue();
 					List<Pair<String, Weather>> ws = new ArrayList<>();
 					ws.add(new Pair<String, Weather>(roadId, weather));
 					try {
@@ -110,8 +138,15 @@ public class ChangeWeatherDialog extends JDialog{
 				}
 			}
 		});
-		lowerPanel.add(ok);
+		ok.setPreferredSize(new Dimension(height/3-20, width/6-10));
+		lowerPanelContainer.add(ok);
+		
+		JPanel lowerPanel = new JPanel();
+		lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.X_AXIS));
+		lowerPanel.add(lowerPanelContainer);
 
+		this.add(topPanel);
+		this.add(middlePanel);
 		this.add(lowerPanel);
 
 		this.pack();

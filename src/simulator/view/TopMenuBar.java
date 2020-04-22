@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -18,6 +16,8 @@ import simulator.model.RoadMap;
 import simulator.model.TrafficSimObserver;
 
 public class TopMenuBar extends JMenuBar implements TrafficSimObserver{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private Controller _ctrl;
 	private MainWindow _mw;
