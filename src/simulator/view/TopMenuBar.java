@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.SwingUtilities;
 
 import simulator.control.Controller;
 import simulator.events.Event;
@@ -50,7 +51,12 @@ public class TopMenuBar extends JMenuBar implements TrafficSimObserver{
         fileMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_mw.cargaFicherosPulsado();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						_mw.cargaFicherosPulsado();
+					}
+				});
 			}
         });
         
@@ -61,7 +67,12 @@ public class TopMenuBar extends JMenuBar implements TrafficSimObserver{
         CO2ClassMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				_mw.cambiarClaseContPulsado(_map.getVehicles(), _time);
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						_mw.cambiarClaseContPulsado(_map.getVehicles(), _time);
+					}
+				});
 			}
         });
         
@@ -72,29 +83,48 @@ public class TopMenuBar extends JMenuBar implements TrafficSimObserver{
         weatherMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				_mw.cambiarWeatherPulsado(_map.getRoads(), _time);
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						_mw.cambiarWeatherPulsado(_map.getRoads(), _time);
+					}
+				});
 			}
         });
         
+        //Simulator
+        JMenu simMenu = new JMenu("Simulator");
+        
+        
         //Run
-        JMenu runMenu = new JMenu("Run");
+        JMenuItem runMenu = new JMenuItem("Run");
         runMenu.setMnemonic(KeyEvent.VK_ENTER);
         runMenu.setToolTipText("Run the simulation");
         runMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-					_mw.runSimGeneral();
+					SwingUtilities.invokeLater(new Runnable() {
+						@Override
+						public void run() {
+							_mw.runSimGeneral();
+						}
+					});
 			}
         });
         
         //Stop
-        JMenu stopMenu = new JMenu("Stop");
-        stopMenu.setMnemonic(KeyEvent.VK_ENTER);
+        JMenuItem stopMenu = new JMenuItem("Stop");
+        stopMenu.setMnemonic(KeyEvent.VK_K);
         stopMenu.setToolTipText("Stop the simulation");
         stopMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-					_mw.stop();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						_mw.stopSim();
+					}
+				});
 			}
         });
         
@@ -104,9 +134,10 @@ public class TopMenuBar extends JMenuBar implements TrafficSimObserver{
         addMenu.add(fileMenuItem);
         addMenu.add(CO2ClassMenuItem);
         addMenu.add(weatherMenuItem);
+        simMenu.add(runMenu);
+        simMenu.add(stopMenu);
         this.add(addMenu);
-        this.add(runMenu);
-        this.add(stopMenu);
+        this.add(simMenu);
 
     }
 	

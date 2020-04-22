@@ -123,8 +123,12 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		runButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setEnabled(false);
-				_mw.runSimGeneral();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						_mw.runSimGeneral();
+					}
+				});
 			}
 		});
 		runButton.setIcon(new ImageIcon("resources/icons/run.png"));
@@ -135,7 +139,12 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		stopButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_mw.stop();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						_mw.stopSim();
+					}
+				});
 			}
 		});
 		stopButton.setIcon(new ImageIcon("resources/icons/stop.png"));
@@ -214,7 +223,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 	}
 	@Override
 	public void onError(String err​) {
-		_mw.stop();
+		_mw.stopSim();
 		enableToolBar(true);
 	}
 }

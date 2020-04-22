@@ -150,7 +150,7 @@ public class MainWindow extends JFrame {
 		}
 	}
 
-	void stop() {
+	void stopSim() {
 		_stopped = true;
 	}
 
