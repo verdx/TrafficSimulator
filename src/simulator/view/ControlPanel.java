@@ -2,6 +2,7 @@ package simulator.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.swing.JSpinner;
 import javax.swing.JToolBar;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
 import simulator.control.Controller;
 import simulator.events.Event;
@@ -57,6 +59,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 	private void initGUI() {
 		this.setLayout(new BorderLayout());
 		toolBar = new JToolBar();
+		toolBar.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		//Carga de ficheros
 		cargaFicheros = new JButton();
@@ -112,11 +115,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		JLabel ticksText = new JLabel("Ticks: ");
 		ticksSpinnerNM = new SpinnerNumberModel(1, 1, 1000, 1);
 		ticksSpinner = new JSpinner(ticksSpinnerNM);
-		int w = ticksSpinner.getWidth();   
-		int h = ticksSpinner.getHeight();
-		Dimension d = new Dimension(w / 10, h/10);
-		ticksSpinner.setPreferredSize(d);
-		//NO DEJA CAMBIAR TAMAÑO
+		ticksSpinner.setMaximumSize(new Dimension(100, 20));
 
 		//RunButton
 		runButton = new JButton();
