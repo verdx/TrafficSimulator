@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import simulator.control.Controller;
 import simulator.events.Event;
 import simulator.events.SetContClassEvent;
+import simulator.misc.ClaseContList;
 import simulator.misc.Pair;
 import simulator.model.Vehicle;
 

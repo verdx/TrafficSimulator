@@ -30,8 +30,10 @@ public class StatusBar extends JPanel implements TrafficSimObserver{
 		
 		ticksText = new JTextArea();
 		ticksText.setSize(20, this.getHeight());
+		ticksText.setText("0");
 		
 		eventsText = new JTextArea();
+		eventsText.setText("Welcome to TrafficSimulator!");
 		
 		this.add(ticksText);
 		this.add(new JSeparator(SwingConstants.VERTICAL));
