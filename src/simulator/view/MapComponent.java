@@ -47,6 +47,7 @@ public class MapComponent extends JPanel implements TrafficSimObserver {
 		_car = loadImage("car_front.png");
 	}
 
+	@Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
 		Graphics2D g = (Graphics2D) graphics;
@@ -91,7 +92,7 @@ public class MapComponent extends JPanel implements TrafficSimObserver {
 			// choose a color for the road depending on the total contamination, the darker
 			// the
 			// more contaminated (wrt its co2 limit)
-			int roadColorValue = 200 - (int) (200.0 * Math.min(1.0, (double) r.getTotalCO2() / (1.0 + (double) r.getCO2Limit())));
+			int roadColorValue = 200 - (int) (200.0 * Math.min(1.0, r.getTotalCO2() / (1.0 + r.getCO2Limit())));
 			Color roadColor = new Color(roadColorValue, roadColorValue, roadColorValue);
 
 			// draw line from (x1,y1) to (x2,y2) with arrow of color arrowColor and line of
@@ -115,7 +116,7 @@ public class MapComponent extends JPanel implements TrafficSimObserver {
 				int y2 = r.getDestJunc().getY();
 				double roadLength = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 				double alpha = Math.atan(((double) Math.abs(x1 - x2)) / ((double) Math.abs(y1 - y2)));
-				double relLoc = roadLength * ((double) v.getLocation()) / ((double) r.getLength());
+				double relLoc = roadLength * (v.getLocation()) / (r.getLength());
 				double x = Math.sin(alpha) * relLoc;
 				double y = Math.cos(alpha) * relLoc;
 				int xDir = x1 < x2 ? 1 : -1;
@@ -126,7 +127,7 @@ public class MapComponent extends JPanel implements TrafficSimObserver {
 
 				// Choose a color for the vehcile's label and background, depending on its
 				// contamination class
-				int vLabelColor = (int) (25.0 * (10.0 - (double) v.getContClass()));
+				int vLabelColor = (int) (25.0 * (10.0 - v.getContClass()));
 				g.setColor(new Color(0, vLabelColor, 0));
 
 				// draw an image of a car (with circle as background) and it identifier

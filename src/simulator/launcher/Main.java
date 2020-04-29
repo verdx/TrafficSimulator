@@ -117,7 +117,7 @@ public class Main {
 	}
 
 	private static void parseOutFileOption(CommandLine line) throws ParseException {
-		if (_mode == "console")
+		if (_mode.equals("console"))
 			_outFile = line.getOptionValue("o");
 	}
 
@@ -138,7 +138,7 @@ public class Main {
 	private static void parseModeOption(CommandLine line) throws ParseException {
 		String mode = line.getOptionValue("m");
 
-		if(mode != "gui" && mode != "console") {
+		if(mode.equals("gui") && mode.contentEquals("console")) {
 			_mode = _modeDefaultValue; 
 		} else {
 			_mode = mode;
@@ -179,7 +179,12 @@ public class Main {
 		try {
 			Controller cont = new Controller(sim, _eventsFactory);
 
-			OutputStream out = new FileOutputStream(_outFile);
+			OutputStream out;
+			if(_outFile != null) {
+				out = new FileOutputStream(_outFile);
+			} else {
+				out = System.out;
+			}
 			InputStream in = new FileInputStream(_inFile);
 			cont.loadEvents(in);
 			cont.run(_timeLimit, out);
@@ -210,9 +215,9 @@ public class Main {
 	private static void start(String[] args) throws IOException {
 		initFactories();
 		parseArgs(args);
-		if(_mode == "console") {
+		if(_mode.equals("console")) {
 			startBatchMode();
-		} else if (_mode == "gui") {
+		} else if (_mode.equals("gui")) {
 			startGuiMode();
 		}
 	}

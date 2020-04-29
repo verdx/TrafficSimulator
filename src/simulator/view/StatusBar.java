@@ -38,19 +38,25 @@ public class StatusBar extends JPanel implements TrafficSimObserver{
 		this.add(eventsText);
 	}
 	
+	@Override
 	public void onAdvanceStart(RoadMap map​, List<Event> events, int time) {
 		ticksText.setText("Time: " + time);
 		eventsText.setText("");
 	}
+	@Override
 	public void onAdvanceEnd(RoadMap map​, List<Event> events, int time​) {}
+	@Override
 	public void onEventAdded(RoadMap map​, List<Event> events​, Event e, int time​) {
 		eventsText.setText( "Event added: " + e.toString());
 	}
+	@Override
 	public void onReset(RoadMap map​, List<Event> events​, int time​) {
 		ticksText.setText("");
 		eventsText.setText("");
 	}
+	@Override
 	public void onRegister(RoadMap map​, List<Event> events, int time​) {}
+	@Override
 	public void onError(String err​) {
 		eventsText.setText(err​);
 	}

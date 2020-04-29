@@ -95,9 +95,11 @@ public class MainWindow extends JFrame {
 		this.setVisible(true);
 	}
 	
-	private Table<Event> createEventsTable() {
+	private TableModel<Event> createEventsTable() {
 		String[] colNames = {"Time", "Description" };
-		Table<Event> eventsTable = new Table<Event>(_ctrl, colNames) {
+		TableModel<Event> eventsTable = new TableModel<Event>(_ctrl, colNames) {
+
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void setContentsList(RoadMap map, List<Event> events) {
@@ -124,10 +126,12 @@ public class MainWindow extends JFrame {
 		return eventsTable;
 	}
 	
-	private Table<Vehicle> createVehiclesTable() {
+	private TableModel<Vehicle> createVehiclesTable() {
 		String[] colNames  = {"Id", "Location", "Itinerary", 
 				"CO2 Class", "Max. Speed", "Speed", "Total CO2", "Distance"};
-		Table<Vehicle> vehiclesTable = new Table<Vehicle>(_ctrl, colNames) {
+		TableModel<Vehicle> vehiclesTable = new TableModel<Vehicle>(_ctrl, colNames) {
+
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void setContentsList(RoadMap map, List<Event> events) {
@@ -173,9 +177,11 @@ public class MainWindow extends JFrame {
 		
 	}
 	
-	private Table<Junction> createJunctionsTable() {
+	private TableModel<Junction> createJunctionsTable() {
 		String[] colNames = {"Id","Green", "Queues"};
-		Table<Junction> junctionsTable = new Table<Junction>(_ctrl, colNames) {
+		TableModel<Junction> junctionsTable = new TableModel<Junction>(_ctrl, colNames) {
+
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void setContentsList(RoadMap map, List<Event> events) {
@@ -209,10 +215,12 @@ public class MainWindow extends JFrame {
 		return junctionsTable;
 	}
 	
-	private Table<Road> createRoadsTable() {
+	private TableModel<Road> createRoadsTable() {
 		String[] colNames = {"Id", "Length", "Weather", 
 				"Max. Speed", "Speed Limit", "Total CO2", "CO2 Limit"};
-		Table<Road> roadsTable = new Table<Road>(_ctrl, colNames) {
+		TableModel<Road> roadsTable = new TableModel<Road>(_ctrl, colNames) {
+
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void setContentsList(RoadMap map, List<Event> events) {

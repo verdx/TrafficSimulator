@@ -9,19 +9,19 @@ import simulator.events.Event;
 import simulator.model.RoadMap;
 import simulator.model.TrafficSimObserver;
 
-public abstract class Table<T> extends AbstractTableModel implements TrafficSimObserver{
+public abstract class TableModel<T> extends AbstractTableModel implements TrafficSimObserver{
 
 	private static final long serialVersionUID = 1L;
 	
 	protected List<T> _contents;
 	private String[] _colNames;
 	
-	public Table(Controller ctrl, String[] colNames) {
+	public TableModel(Controller ctrl, String[] colNames) {
 		ctrl.addObserver(this);
 		_colNames = colNames;
 	}
 	
-	public Table() {};
+	public TableModel() {};
 
 	public void update() {
 		fireTableDataChanged();	

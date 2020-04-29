@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import extra.jtable.EventEx;
-import simulator.control.Controller;
 import simulator.events.Event;
 import simulator.model.RoadMap;
 import simulator.model.TrafficSimObserver;
@@ -93,10 +91,16 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 		return s;
 	}
 
+	@Override
 	public void onAdvanceStart(RoadMap map​, List<Event> events, int time​) {}
+	@Override
 	public void onAdvanceEnd(RoadMap map​, List<Event> events, int time​) {}
+	@Override
 	public void onEventAdded(RoadMap map​, List<Event> events​, Event e, int time​) {}
+	@Override
 	public void onReset(RoadMap map​, List<Event> events​, int time​) {}
+	@Override
 	public void onRegister(RoadMap map​, List<Event> events, int time​) {}
+	@Override
 	public void onError(String error) {}
 }

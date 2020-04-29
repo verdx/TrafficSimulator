@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import extra.jtable.EventEx;
 import simulator.events.Event;
 import simulator.events.EventComparator;
 import simulator.misc.SortedArrayList;

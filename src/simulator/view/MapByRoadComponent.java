@@ -50,6 +50,7 @@ public class MapByRoadComponent extends JComponent implements TrafficSimObserver
 		_car = loadImage("car.png");
 	}
 
+	@Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
 		Graphics2D g = (Graphics2D) graphics;
@@ -85,6 +86,7 @@ public class MapByRoadComponent extends JComponent implements TrafficSimObserver
 	}
 	
 	private void drawRoad(Graphics g, Road r, int x1, int x2, int y) {
+		g.setColor(_ROAD_LABEL_COLOR);
 		g.drawLine(x1, y, x2, y);
 		
 		// choose a color for the desetJunc circle depending on the traffic light of the road
@@ -148,7 +150,7 @@ public class MapByRoadComponent extends JComponent implements TrafficSimObserver
 		g.drawImage(weather, x2 + 20, y - 16, 32, 32, this);
 		
 		//Draw CO2 Level
-		int c = (int) Math.floor(Math.min((double) r.getTotalCO2()/ (1.0 + (double) r.getCO2Limit()), 1.0) / 0.19);
+		int c = (int) Math.floor(Math.min(r.getTotalCO2()/ (1.0 + r.getCO2Limit()), 1.0) / 0.19);
 		Image co2 = loadImage("cont_" + c + ".png");
 		g.drawImage(co2, x2 + 72, y - 16, 32, 32 , this);
 	}
