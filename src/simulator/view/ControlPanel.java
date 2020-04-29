@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -19,16 +18,13 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import simulator.control.Controller;
-import simulator.events.Event;
 import simulator.model.RoadMap;
-import simulator.model.TrafficSimObserver;
 
 
-public class ControlPanel extends JPanel implements TrafficSimObserver{
+public class ControlPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Controller _ctrl;
 	private RoadMap _map;
 	private int _time;
 	
@@ -48,9 +44,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 
 	public ControlPanel(Controller ctrl, MainWindow mw) {
 		super();
-		_ctrl = ctrl;
 		_mw = mw;
-		_ctrl.addObserver(this);
 		
 		initGUI();
 
@@ -213,36 +207,11 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 	int getTicks() {
 		return ticksSpinnerNM.getNumber().intValue();
 	}
+	
+	void actualizar(RoadMap map, int time) {
+		_map = map;
+		_time = time;
+	}
 
-	@Override
-	public void onAdvanceStart(RoadMap map, List<Event> events, int time) {
-		_map = map;
-		_time = time;
-	}
-	@Override
-	public void onAdvanceEnd(RoadMap map, List<Event> events, int time) {
-		_map = map;
-		_time = time;
-	}
-	@Override
-	public void onEventAdded(RoadMap map, List<Event> events​, Event e, int time) {
-		_map = map;
-		_time = time;
-	}
-	@Override
-	public void onReset(RoadMap map, List<Event> events​, int time) {
-		enableToolBar(true);
-		_map = map;
-		_time = time;
-	}
-	@Override
-	public void onRegister(RoadMap map, List<Event> events, int time) {
-		_map = map;
-		_time = time;
-	}
-	@Override
-	public void onError(String err​) {
-		_mw.stopSim();
-		enableToolBar(true);
-	}
+	
 }

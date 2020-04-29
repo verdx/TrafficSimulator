@@ -24,19 +24,22 @@ import simulator.events.Event;
 import simulator.model.Junction;
 import simulator.model.Road;
 import simulator.model.RoadMap;
+import simulator.model.TrafficSimObserver;
 import simulator.model.Vehicle;
 
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements TrafficSimObserver{
 
 	private static final long serialVersionUID = 1L;
 	private Controller _ctrl;
 	private JFileChooser jsonChooser;
 	private ControlPanel contPanel;
+	private StatusBar statusBar;
 	private boolean _stopped;
 
 	public MainWindow(Controller ctrl) {
 		super("Traffic Simulator");
 		_ctrl = ctrl;
+		_ctrl.addObserver(this);
 		jsonChooser = new JFileChooser();
 		_stopped = true;
 		initGui();
@@ -52,7 +55,8 @@ public class MainWindow extends JFrame {
 		this.setJMenuBar(new TopMenuBar(_ctrl, this));
 		contPanel = new ControlPanel(_ctrl, this);
 		mainPanel.add(contPanel, BorderLayout.PAGE_START);
-		mainPanel.add(new StatusBar(_ctrl), BorderLayout.PAGE_END);
+		statusBar = new StatusBar();
+		mainPanel.add(statusBar, BorderLayout.PAGE_END);
 
 		JPanel viewsPanel = new JPanel(new GridLayout(1,2));
 		mainPanel.add(viewsPanel, BorderLayout.CENTER);
@@ -331,6 +335,38 @@ public class MainWindow extends JFrame {
 	
 	void reset() {
 		_ctrl.reset();
+	}
+	
+	@Override
+	public void onAdvanceStart(RoadMap map, List<Event> events, int time) {
+		statusBar.actualizarTime("Time: " + time);
+		statusBar.actualizarEvents("Running simulation");
+	}
+	@Override
+	public void onAdvanceEnd(RoadMap map, List<Event> events, int time) {
+		contPanel.actualizar(map, time);
+	}
+	@Override
+	public void onEventAdded(RoadMap map, List<Event> events​, Event e, int time) {
+		contPanel.actualizar(map, time);
+		statusBar.actualizarEvents("Event added: " + e.toString());
+	}
+	@Override
+	public void onReset(RoadMap map, List<Event> events​, int time) {
+		contPanel.enableToolBar(true);
+		contPanel.actualizar(map, time);
+		statusBar.actualizarTime("");
+		statusBar.actualizarEvents("Simulator resetted");
+	}
+	@Override
+	public void onRegister(RoadMap map, List<Event> events, int time) {
+		contPanel.actualizar(map, time);
+	}
+	@Override
+	public void onError(String err) {
+		stopSim();
+		contPanel.enableToolBar(true);
+		statusBar.actualizarEvents(err);
 	}
 
 }

@@ -1,30 +1,20 @@
 package simulator.view;
 
-import java.util.List;
-
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
-import simulator.control.Controller;
-import simulator.events.Event;
-import simulator.model.RoadMap;
-import simulator.model.TrafficSimObserver;
-
-public class StatusBar extends JPanel implements TrafficSimObserver{
+public class StatusBar extends JPanel{
 	
 	
 	private static final long serialVersionUID = 1L;
-	private Controller _ctrl;
 	private JTextArea ticksText;
 	private JTextArea eventsText;
 	
-	public StatusBar(Controller ctrl) {
+	public StatusBar() {
 		super();
-		_ctrl = ctrl;
-		_ctrl.addObserver(this);
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
@@ -40,27 +30,11 @@ public class StatusBar extends JPanel implements TrafficSimObserver{
 		this.add(eventsText);
 	}
 	
-	@Override
-	public void onAdvanceStart(RoadMap map​, List<Event> events, int time) {
-		ticksText.setText("Time: " + time);
-		eventsText.setText("");
+	void actualizarTime(String time) {
+		ticksText.setText(time);
 	}
-	@Override
-	public void onAdvanceEnd(RoadMap map​, List<Event> events, int time​) {}
-	@Override
-	public void onEventAdded(RoadMap map​, List<Event> events​, Event e, int time​) {
-		eventsText.setText( "Event added: " + e.toString());
+	
+	void actualizarEvents(String events) {
+		eventsText.setText(events);
 	}
-	@Override
-	public void onReset(RoadMap map​, List<Event> events​, int time​) {
-		ticksText.setText("");
-		eventsText.setText("");
-	}
-	@Override
-	public void onRegister(RoadMap map​, List<Event> events, int time​) {}
-	@Override
-	public void onError(String err​) {
-		eventsText.setText(err​);
-	}
-
 }
