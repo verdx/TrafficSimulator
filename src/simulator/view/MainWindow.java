@@ -328,5 +328,9 @@ public class MainWindow extends JFrame {
 	void stopSim() {
 		_stopped = true;
 	}
+	
+	void reset() {
+		_ctrl.reset();
+	}
 
 }

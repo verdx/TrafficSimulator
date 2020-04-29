@@ -41,6 +41,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 	private JButton runButton;
 	private JButton stopButton;
 	private JButton exitButton;
+	private JButton resetButton;
 	private MainWindow _mw;
 	
 	
@@ -147,6 +148,22 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		});
 		stopButton.setIcon(new ImageIcon("resources/icons/stop.png"));
 		stopButton.setVisible(true);
+		
+		//ResetButton
+		resetButton = new JButton();
+		resetButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						_mw.reset();
+					}
+				});
+			}
+		});
+		resetButton.setIcon(new ImageIcon("resources/icons/reset.png"));
+		resetButton.setVisible(true);
 
 		//ExitProgram
 		exitButton = new JButton();
@@ -165,6 +182,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 
 
 
+		
 		toolBar.add(cargaFicheros);
 		toolBar.addSeparator();
 		toolBar.add(cambiarClaseCont);
@@ -175,6 +193,8 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		toolBar.addSeparator();
 		toolBar.add(ticksText);
 		toolBar.add(ticksSpinner);
+		toolBar.addSeparator();
+		toolBar.add(resetButton);
 		toolBar.add(Box.createHorizontalGlue());
 		toolBar.add(exitButton);
 		this.add(toolBar, BorderLayout.CENTER);
@@ -187,6 +207,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		cambiarWeather.setEnabled(bool);
 		ticksSpinner.setEnabled(bool);
 		runButton.setEnabled(bool);
+		resetButton.setEnabled(bool);
 	}
 
 	int getTicks() {
