@@ -85,6 +85,13 @@ public class Junction extends SimulatedObject {
 			queues.put(jo1);
 		}
 		jo.put("queues", queues);
+		
+		JSONArray coor = new JSONArray();
+		coor.put(x);
+		coor.put(y);
+		jo.put("coor", coor);
+		jo.put("ls_strategy", lsStrategy.save());
+		jo.put("dq_strategy", dqStrategy.save());
 		return jo;
 	}
 

@@ -39,16 +39,50 @@ public class TopMenuBar extends JMenuBar implements TrafficSimObserver{
 	}
 	
 	private void createMenuBar() {
+		
+		//FILE Category
+		JMenu fileMenu = new JMenu("File");
+		fileMenu.setMnemonic(KeyEvent.VK_F);
+		
+		//Save as 
+		JMenuItem saveMenuItem = new JMenuItem("Save as...");
+		saveMenuItem.setMnemonic(KeyEvent.VK_S);
+		saveMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						_mw.save();
+					}
+				});
+			}
+		});
+
+		//Save as 
+		JMenuItem loadMenuItem = new JMenuItem("Load File");
+		loadMenuItem.setMnemonic(KeyEvent.VK_S);
+		loadMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						_mw.load();
+					}
+				});
+			}
+		});
 
 		//ADD Category
-        JMenu addMenu = new JMenu("Add");
-        addMenu.setMnemonic(KeyEvent.VK_A);
+		JMenu addMenu = new JMenu("Add");
+		addMenu.setMnemonic(KeyEvent.VK_A);
 
-        //Add file
-        JMenuItem fileMenuItem = new JMenuItem("File");
-        fileMenuItem.setMnemonic(KeyEvent.VK_F);
-        fileMenuItem.setToolTipText("Add a json file");
-        fileMenuItem.addActionListener(new ActionListener() {
+		//Add file
+		JMenuItem fileMenuItem = new JMenuItem("Events File");
+		fileMenuItem.setMnemonic(KeyEvent.VK_F);
+		fileMenuItem.setToolTipText("Add a json file");
+		fileMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SwingUtilities.invokeLater(new Runnable() {
@@ -131,11 +165,15 @@ public class TopMenuBar extends JMenuBar implements TrafficSimObserver{
         
         
 
+        
+        fileMenu.add(saveMenuItem);
+        fileMenu.add(loadMenuItem);
         addMenu.add(fileMenuItem);
         addMenu.add(CO2ClassMenuItem);
         addMenu.add(weatherMenuItem);
         simMenu.add(runMenu);
         simMenu.add(stopMenu);
+        this.add(fileMenu);
         this.add(addMenu);
         this.add(simMenu);
 

@@ -2,6 +2,9 @@ package simulator.events;
 
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import simulator.misc.Pair;
 import simulator.model.RoadMap;
 
@@ -42,6 +45,27 @@ public class SetContClassEvent extends Event {
 		}
 		result += "]";
 		return result;
+	}
+
+	@Override
+	public JSONObject save() {
+		JSONObject jo = new JSONObject();
+		jo.put("type", "set_cont_class");
+		
+		JSONObject data = new JSONObject();
+		data.put("time", _time);
+		
+		JSONArray info = new JSONArray();
+		for(Pair<String, Integer> p: cs) {
+			JSONObject temp = new JSONObject();
+			temp.put("vehicle", p.getFirst());
+			temp.put("class", p.getSecond());
+		}
+		data.put("info", info);
+
+		jo.put("data", data);
+		
+		return jo;
 	}
 
 }

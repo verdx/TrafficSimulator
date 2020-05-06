@@ -3,8 +3,10 @@ package simulator.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -18,6 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.json.JSONObject;
 
 import simulator.control.Controller;
 import simulator.events.Event;
@@ -39,10 +43,12 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 	public MainWindow(Controller ctrl) {
 		super("Traffic Simulator");
 		_ctrl = ctrl;
+		initGui();
 		_ctrl.addObserver(this);
 		jsonChooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON files", "json");
+		jsonChooser.setFileFilter(filter);
 		_stopped = true;
-		initGui();
 	}
 
 	private void initGui() {
@@ -278,8 +284,6 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 	
 	void cargaFicherosPulsado() {
 		
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON files", "json");
-		jsonChooser.setFileFilter(filter);
 		int returnVal = jsonChooser.showOpenDialog(this);
 		try {
 			if(returnVal != JFileChooser.APPROVE_OPTION)
@@ -337,6 +341,42 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 		_ctrl.reset();
 	}
 	
+	void save() {
+		JSONObject jo = _ctrl.save();
+		int retval = jsonChooser.showSaveDialog(this);
+		if (retval == JFileChooser.APPROVE_OPTION) {
+			File file = jsonChooser.getSelectedFile();
+			if (file == null) {
+				return;
+			}
+			if (!file.getName().toLowerCase().endsWith(".json")) {
+				file = new File(file.getParentFile(), file.getName() + ".json");
+			}
+			try {
+				FileWriter fw = new FileWriter(file);
+				fw.write(jo.toString(4));
+				fw.flush();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(new JFrame(), "Problem saving: " + e.getMessage(), "Dialog",
+				        JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+	
+	void load() {
+		int returnVal = jsonChooser.showOpenDialog(this);
+		try {
+			if(returnVal != JFileChooser.APPROVE_OPTION)
+				throw new FileNotFoundException();
+			_ctrl.reset();
+			_ctrl.load(new FileInputStream(jsonChooser.getSelectedFile()));
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Error retrieving events from file: " + e.getMessage());
+			e.printStackTrace();
+		}
+		
+	}
+
 	@Override
 	public void onAdvanceStart(RoadMap map, List<Event> events, int time) {
 		statusBar.actualizarTime("Time: " + time);

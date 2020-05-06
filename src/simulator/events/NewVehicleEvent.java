@@ -3,6 +3,9 @@ package simulator.events;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import simulator.model.Junction;
 import simulator.model.RoadMap;
 import simulator.model.Vehicle;
@@ -47,6 +50,26 @@ public class NewVehicleEvent extends Event {
 	@Override
 	public String toString() {
 		return "New Vehicle '" + id + "'"; 
+	}
+	
+	@Override
+	public JSONObject save() {
+		JSONObject jo = new JSONObject();
+		jo.put("type", "new_vehicle");
+		
+		JSONObject data = new JSONObject();
+		data.put("time", _time);
+		data.put("id", id);
+		data.put("maxpeed", maxSpeed);
+		data.put("class", contClass);
+		
+		JSONArray itineraryJSON = new JSONArray();
+		for(String s: itinerary) {
+			itineraryJSON.put(s);
+		}
+		data.put("itinerary", itineraryJSON);
+		jo.put("data", data);
+		return jo;
 	}
 
 }

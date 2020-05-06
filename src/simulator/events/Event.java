@@ -1,8 +1,10 @@
 package simulator.events;
 
+import org.json.JSONObject;
+
 import simulator.model.RoadMap;
 
-public abstract class Event implements Comparable<Event> {
+public abstract class Event{
 
 	protected int _time;
 
@@ -17,11 +19,7 @@ public abstract class Event implements Comparable<Event> {
 		return _time;
 	}
 
-	@Override
-	public int compareTo(Event o) {
-		// TODO complete
-		return 0;
-	}
-
 	public abstract void execute(RoadMap map);
+
+	public abstract JSONObject save();
 }

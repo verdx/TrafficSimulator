@@ -30,15 +30,26 @@ public class Controller{
 		}
 	}
 
+	public void load(InputStream in) throws Exception {
+		JSONObject jo = new JSONObject(new JSONTokener(in));
+		JSONArray events = jo.getJSONArray("events");
+		loadEventsArray(events);
+		sim.load(jo);
+	}
+
 	public void loadEvents(InputStream in) throws Exception {
 		try {
 			JSONObject jo = new JSONObject(new JSONTokener(in));
 			JSONArray events = jo.getJSONArray("events");
-			for(int i = 0; i < events.length();i++) {
-				sim.addEvent(eventsFactory.createInstance(events.getJSONObject(i)));
-			}
+			loadEventsArray(events);
 		}catch(JSONException e) {
 			throw new Exception("Problem parsing inputStream json: " + e.getMessage());
+		}
+	}
+
+	private void loadEventsArray(JSONArray events) {
+		for(int i = 0; i < events.length();i++) {
+			sim.addEvent(eventsFactory.createInstance(events.getJSONObject(i)));
 		}
 	}
 
@@ -78,6 +89,10 @@ public class Controller{
 
 	public List<Event> getEvents() {
 		return sim.getEvents();
+	}
+
+	public JSONObject save() {
+		return sim.save();
 	}
 
 }

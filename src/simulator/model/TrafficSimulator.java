@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import simulator.events.Event;
@@ -101,6 +102,25 @@ public class TrafficSimulator implements Observable<TrafficSimObserver>{
 		return jo;
 	}
 	
+	public JSONObject save() {
+		JSONObject jo = new JSONObject();
+
+		jo.put("time", _time);
+
+		JSONObject roadMapJson = roadMap.report();
+
+		jo.put("roadMap", roadMapJson);
+		
+		JSONArray eventsJson = new JSONArray();
+		for(Event e: events) {
+			eventsJson.put(e.save());
+		}
+		
+		jo.put("events", eventsJson);
+		
+		return jo;
+	}
+	
 	@Override
 	public void addObserver(TrafficSimObserver o) {
 		observers.add(o);
@@ -131,6 +151,12 @@ public class TrafficSimulator implements Observable<TrafficSimObserver>{
 
 	public List<Junction> getJunctions() {
 		return roadMap.getJunctions();
+	}
+
+	public void load(JSONObject jo) throws Exception {
+		_time = jo.getInt("time");
+		JSONObject roadmap = jo.getJSONObject("roadMap");
+		roadMap.load(roadmap);	
 	}
 
 }

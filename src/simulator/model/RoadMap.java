@@ -11,6 +11,14 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import simulator.factories.Builder;
+import simulator.factories.BuilderBasedFactory;
+import simulator.factories.Factory;
+import simulator.factories.MostCrowdedStrategyBuilder;
+import simulator.factories.MoveAllStrategyBuilder;
+import simulator.factories.MoveFirstStrategyBuilder;
+import simulator.factories.RoundRobinStrategyBuilder;
+
 public class RoadMap {
 	
 	private List<Junction> junctions;
@@ -25,7 +33,7 @@ public class RoadMap {
 	
 	
 	RoadMap() {
-		reset();
+		init();
 	}
 	
 	public void addJunction(Junction j) {
@@ -127,7 +135,7 @@ public class RoadMap {
 		return Collections.unmodifiableList(ids);
 	}
 	
-	public void reset() {
+	public void init() {
 		junctions = new LinkedList<Junction>();
 		roads = new LinkedList<Road>();
 		vehicles = new LinkedList<Vehicle>();
@@ -136,6 +144,17 @@ public class RoadMap {
 		vehiclesMap = new HashMap<String, Vehicle>();
 		srcJuncRoadMap = new HashMap<Road, Junction>();
 		destJuncRoadMap = new HashMap<Road, Junction>();
+	}
+	
+	public void reset() {
+		junctions.clear();
+		roads.clear();
+		vehicles.clear();
+		junctionsMap.clear();
+		roadsMap.clear();
+		vehiclesMap.clear();
+		srcJuncRoadMap.clear();
+		destJuncRoadMap.clear();
 	}
 	
 	public JSONObject report() {
@@ -161,4 +180,93 @@ public class RoadMap {
 		
 		return jo;
 	}
+
+	public void load(JSONObject roadmap) throws Exception{
+		JSONArray vehiclesJSON = roadmap.getJSONArray("vehicles");
+		JSONArray junctionsJSON = roadmap.getJSONArray("junctions");
+		JSONArray roadsJSON = roadmap.getJSONArray("roads");
+
+
+		//Factories para LightSwitchingStrategy
+		List<Builder<LightSwitchingStrategy>> lsbs = new ArrayList<>();
+		lsbs.add( new RoundRobinStrategyBuilder() );
+		lsbs.add( new MostCrowdedStrategyBuilder() );
+		Factory<LightSwitchingStrategy> lssFactory = new BuilderBasedFactory
+				<>(lsbs);
+
+		//Factories para DequeuingStrategy
+		List<Builder<DequeuingStrategy>> dqbs = new ArrayList<>();
+		dqbs.add( new MoveFirstStrategyBuilder() );
+		dqbs.add( new MoveAllStrategyBuilder() );
+		Factory<DequeuingStrategy> dqsFactory = new BuilderBasedFactory<>(dqbs);
+		for(int i = 0; i < junctionsJSON.length(); i++) {
+			Junction junction = parseJunction(junctionsJSON.getJSONObject(i), lssFactory, dqsFactory);
+			this.addJunction(junction);
+		}
+		for(int i = 0; i < vehiclesJSON.length(); i++) {
+			Vehicle vehicle = parseVehicle(vehiclesJSON.getJSONObject(i));
+			this.addVehicle(vehicle);
+		}
+		for(int i = 0; i < roadsJSON.length(); i++) {
+			Road road = parseRoad(roadsJSON.getJSONObject(i));
+			this.addRoad(road);			
+		}
+
+	}
+
+	private Junction parseJunction(JSONObject jo, Factory<LightSwitchingStrategy> lssFactory, Factory<DequeuingStrategy> dqsFactory) throws Exception {
+		String id = jo.getString("id");
+		int xCoor = jo.getJSONArray("coor").getInt(0);
+		int yCoor = jo.getJSONArray("coor").getInt(1);
+		LightSwitchingStrategy lss = lssFactory.createInstance(jo.getJSONObject("ls_strategy"));
+		DequeuingStrategy dqs = dqsFactory.createInstance(jo.getJSONObject("dq_strategy"));
+		return new Junction(id, lss, dqs, xCoor, yCoor);
+		
+	}
+
+
+	private Vehicle parseVehicle(JSONObject jo) throws Exception {
+		String id = jo.getString("id");
+		int maxSpeed = jo.getInt("maxspeed");
+		int contClass = jo.getInt("class");
+		JSONArray itinerary_ja = jo.getJSONArray("itinerary");
+		List<String> itinerary = new ArrayList<String>();
+		for(int j = 0; j < itinerary_ja.length(); j++) {
+			itinerary.add(itinerary_ja.getString(j));
+		}
+		List<Junction> itinerary_j = new LinkedList<Junction>();
+		Junction j;
+		for(String s: itinerary) {
+			j = this.getJunction(s);
+			if (j != null) {
+				itinerary_j.add(j);
+			} else {
+				throw new Exception("Cannot find junction in itinerary.");
+			}
+		}
+			
+		return new Vehicle(id, maxSpeed, contClass, itinerary_j);
+	}
+	
+	private Road parseRoad(JSONObject jo) throws Exception{
+		String id = jo.getString("id");
+		String src = jo.getString("src");
+		String dest = jo.getString("dest");
+		int length = jo.getInt("length");
+		int co2limit = jo.getInt("co2limit");
+		int maxSpeed = jo.getInt("maxspeed");
+		String weather_str = jo.getString("weather");
+		Weather weather = Weather.valueOf(weather_str.toUpperCase());
+		String type = jo.getString("type");
+		if(type.equals("inter_city_road")) {
+			return new InterCityRoad(id, this.getJunction(src), this.getJunction(dest), maxSpeed,
+					co2limit, length, weather);
+		} else if(type.contentEquals("city_road")) {
+			return new CityRoad(id, this.getJunction(src), this.getJunction(dest), maxSpeed,
+					co2limit, length, weather);
+		} else {
+			throw new Exception("Problem parsing road.");
+		}
+	}
+	
 }

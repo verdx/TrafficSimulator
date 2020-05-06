@@ -1,5 +1,7 @@
 package simulator.model;
 
+import org.json.JSONObject;
+
 import simulator.exceptions.RoadCreationException;
 
 public class CityRoad extends Road {
@@ -35,6 +37,13 @@ public class CityRoad extends Road {
 	int calculateVehicleSpeed(Vehicle v) {
 		int resul = (int) Math.ceil((((11.0 - v.getContClass())/11.0)*speedLimit));
 		return resul;
+	}
+	
+	@Override
+	public JSONObject report() {
+		JSONObject jo = super.report();
+		jo.put("type", "city_road");
+		return jo;
 	}
 
 }

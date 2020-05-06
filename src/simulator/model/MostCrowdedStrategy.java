@@ -2,6 +2,8 @@ package simulator.model;
 
 import java.util.List;
 
+import org.json.JSONObject;
+
 public class MostCrowdedStrategy implements LightSwitchingStrategy {
 
 	private int timeSlot;
@@ -43,6 +45,16 @@ public class MostCrowdedStrategy implements LightSwitchingStrategy {
 				return index;
 			}
 		}
+	}
+
+	@Override
+	public JSONObject save() {
+		JSONObject jo = new JSONObject();
+		jo.put("type", "most_crowded_lss");
+		JSONObject data = new JSONObject();
+		data.put("timeslot", timeSlot);
+		jo.put("data", data);
+		return jo;
 	}
 
 }

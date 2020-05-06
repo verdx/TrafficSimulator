@@ -1,5 +1,7 @@
 package simulator.events;
 
+import org.json.JSONObject;
+
 import simulator.exceptions.RoadCreationException;
 import simulator.model.InterCityRoad;
 import simulator.model.RoadMap;
@@ -29,6 +31,24 @@ public class NewInterCityRoadEvent extends NewRoadEvent {
 	@Override
 	public String toString() {
 		return "New InterCity Road '" + id + "'"; 
+	}
+	
+	@Override
+	public JSONObject save() {
+		JSONObject jo = new JSONObject();
+		jo.put("type", "new_inter_city_road");
+		
+		JSONObject data = new JSONObject();
+		data.put("time", _time);
+		data.put("id", id);
+		data.put("src", srcJunc);
+		data.put("dest", destJunc);
+		data.put("maxpeed", maxSpeed);
+		data.put("co2Limit", contLimit);
+		data.put("length", length);
+		data.put("weather", weather);
+		jo.put("data", data);
+		return jo;
 	}
 
 }

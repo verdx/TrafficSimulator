@@ -2,6 +2,9 @@ package simulator.events;
 
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import simulator.misc.Pair;
 import simulator.model.RoadMap;
 import simulator.model.Weather;
@@ -43,6 +46,27 @@ public class SetWeatherEvent extends Event {
 		}
 		result += "]";
 		return result;
+	}
+	
+	@Override
+	public JSONObject save() {
+		JSONObject jo = new JSONObject();
+		jo.put("type", "set_weather");
+		
+		JSONObject data = new JSONObject();
+		data.put("time", _time);
+		
+		JSONArray info = new JSONArray();
+		for(Pair<String, Weather> p: ws) {
+			JSONObject temp = new JSONObject();
+			temp.put("road", p.getFirst());
+			temp.put("weather", p.getSecond());
+		}
+		data.put("info", info);
+
+		jo.put("data", data);
+		
+		return jo;
 	}
 
 }

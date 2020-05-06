@@ -1,5 +1,8 @@
 package simulator.events;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import simulator.model.DequeuingStrategy;
 import simulator.model.Junction;
 import simulator.model.JunctionCreationException;
@@ -39,6 +42,27 @@ public class NewJunctionEvent extends Event {
 	@Override
 	public String toString() {
 		return "New Junction '" + id + "'"; 
+	}
+	
+	@Override
+	public JSONObject save() {
+		JSONObject jo = new JSONObject();
+		jo.put("type", "new_junction");
+		
+		JSONObject data = new JSONObject();
+		data.put("time", _time);
+		data.put("id", id);
+		
+		JSONArray coor = new JSONArray();
+		coor.put(xCoor);
+		coor.put(yCoor);
+		
+		data.put("coor", coor);
+		data.put("ls_strategy", lsStrategy.save());
+		data.put("dp_strategy", dqStrategy.save());
+
+		jo.put("data", data);
+		return jo;
 	}
 
 }
