@@ -1,9 +1,15 @@
 package simulator.control;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +25,9 @@ public class Controller{
 
 	private TrafficSimulator sim;
 	private Factory<Event> eventsFactory;
+	private int simStatus;
+	private short undos;
+	private boolean redo;
 
 	public Controller(TrafficSimulator sim, Factory<Event> eventsFactory) throws Exception {
 		if(sim == null || eventsFactory == null) {
@@ -26,11 +35,14 @@ public class Controller{
 		} else {
 			this.sim = sim;
 			this.eventsFactory = eventsFactory;
-
+			simStatus = 0;
+			undos = 0;
+			redo = false;
 		}
 	}
 
 	public void load(InputStream in) throws Exception {
+		reset();
 		JSONObject jo = new JSONObject(new JSONTokener(in));
 		JSONArray events = jo.getJSONArray("events");
 		loadEventsArray(events);
@@ -93,6 +105,73 @@ public class Controller{
 
 	public JSONObject save() {
 		return sim.save();
+	}
+	
+	public void saveState() {
+		saveStateAux();
+		simStatus++;
+		if(undos > 0) undos--;
+		redo = false;
+	}
+	
+	private void saveStateAux() {
+		JSONObject jo = save();
+		File file = new File("resources/ss" + simStatus % 4 + ".json");
+		try {
+			if(!file.exists()) {
+				file.createNewFile();
+			}
+			FileWriter fw = new FileWriter(file, false);
+			fw.write(jo.toString(4));
+			fw.close();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(new JFrame(), "Problem saving: " + e.getMessage(), "Dialog",
+			        JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public void undo() {
+		try {
+			if(undos > 3) throw new Exception("Can't undo more than four times");
+			if(simStatus < 1) throw new Exception("Not enough saved states");
+			saveStateAux();
+			undos++;
+			simStatus--;
+			redo = true;
+			File file = new File("resources/ss" + simStatus  % 4 + ".json");
+			load(new FileInputStream(file));
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Dialog",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	public boolean canRedo() {
+		return redo;
+	}
+	
+	public void redo() {
+		try {
+			if(!redo || undos <= 0) throw new Exception("Can't redo right now");
+			undos--;
+			simStatus++;
+			redo = (undos > 1);
+			File file = new File("resources/ss" + simStatus % 4 + ".json");
+			load(new FileInputStream(file));
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Dialog",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+
+	public void close() {
+		File file;
+		for(int i = 0; i < 4;i++) {
+			file = new File("resources/ss" + i + ".json");
+			if(file.exists()) {
+				file.delete();
+			}
+		}	
 	}
 
 }

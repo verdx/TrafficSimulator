@@ -3,6 +3,8 @@ package simulator.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -100,7 +102,14 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 		JPanel mapByRoadView = createViewPanel(new MapByRoadComponent(_ctrl), "Map By Road");
 		mapsPanel.add(mapByRoadView);
 
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+		    public void windowClosing(WindowEvent e) {
+		       close();
+		    
+			}
+		});
 		this.pack();
 		this.setVisible(true);
 	}
@@ -303,6 +312,7 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 	}
 	
 	void runSimGeneral() {
+		_ctrl.saveState();
 		_stopped = false;
 		run_sim(contPanel.getTicks());
 		
@@ -366,7 +376,6 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 		try {
 			if(returnVal != JFileChooser.APPROVE_OPTION)
 				throw new FileNotFoundException();
-			_ctrl.reset();
 			_ctrl.load(new FileInputStream(jsonChooser.getSelectedFile()));
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Error retrieving events from file: " + e.getMessage());
@@ -375,6 +384,15 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 		
 	}
 
+	void close() {
+		_ctrl.close();
+		int response = JOptionPane.showConfirmDialog(null, "Do you want to exit?", "Confirm",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		if (response == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
+	
 	@Override
 	public void onAdvanceStart(RoadMap map, List<Event> events, int time) {
 		statusBar.actualizarTime("Time: " + time);
@@ -395,6 +413,7 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 		contPanel.actualizar(map, time);
 		statusBar.actualizarTime("");
 		statusBar.actualizarEvents("Simulator resetted");
+		contPanel.enableRedo(_ctrl.canRedo());
 	}
 	@Override
 	public void onRegister(RoadMap map, List<Event> events, int time) {
@@ -417,6 +436,14 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 	public void onLoad(RoadMap map, List<Event> event, int time) {
 		statusBar.actualizarEvents("Se ha cargado un juego");
 		statusBar.actualizarTime("" + time);
+	}
+
+	public void undo() {
+		_ctrl.undo();
+	}
+
+	public void redo() {
+		_ctrl.redo();
 	}
 
 }

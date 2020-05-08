@@ -9,7 +9,6 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JToolBar;
@@ -38,6 +37,8 @@ public class ControlPanel extends JPanel{
 	private JButton stopButton;
 	private JButton exitButton;
 	private JButton resetButton;
+	private JButton undoButton;
+	private JButton redoButton;
 	private MainWindow _mw;
 	
 	
@@ -143,6 +144,39 @@ public class ControlPanel extends JPanel{
 		stopButton.setIcon(new ImageIcon("resources/icons/stop.png"));
 		stopButton.setVisible(true);
 		
+		//UndoButton
+		undoButton = new JButton();
+		undoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						_mw.undo();
+					}
+				});
+			}
+		});
+		undoButton.setIcon(new ImageIcon("resources/icons/undo.png"));
+		undoButton.setVisible(true);
+
+		//UndoButton
+		redoButton = new JButton();
+		redoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						_mw.redo();
+					}
+				});
+			}
+		});
+		redoButton.setIcon(new ImageIcon("resources/icons/redo.png"));
+		redoButton.setVisible(true);
+		redoButton.setEnabled(false);
+
 		//ResetButton
 		resetButton = new JButton();
 		resetButton.addActionListener(new ActionListener() {
@@ -164,11 +198,7 @@ public class ControlPanel extends JPanel{
 		exitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int response = JOptionPane.showConfirmDialog(null, "Do you want to exit?", "Confirm",
-						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-				if (response == JOptionPane.YES_OPTION) {
-					System.exit(0);
-				}
+				_mw.close();
 			}
 		});
 		exitButton.setIcon(new ImageIcon("resources/icons/exit.png"));
@@ -184,6 +214,8 @@ public class ControlPanel extends JPanel{
 		toolBar.addSeparator();
 		toolBar.add(runButton);
 		toolBar.add(stopButton);
+		toolBar.add(undoButton);
+		toolBar.add(redoButton);
 		toolBar.addSeparator();
 		toolBar.add(ticksText);
 		toolBar.add(ticksSpinner);
@@ -202,6 +234,7 @@ public class ControlPanel extends JPanel{
 		ticksSpinner.setEnabled(bool);
 		runButton.setEnabled(bool);
 		resetButton.setEnabled(bool);
+		undoButton.setEnabled(bool);
 	}
 
 	int getTicks() {
@@ -211,6 +244,10 @@ public class ControlPanel extends JPanel{
 	void actualizar(RoadMap map, int time) {
 		_map = map;
 		_time = time;
+	}
+
+	public void enableRedo(boolean bool) {
+		redoButton.setEnabled(bool);
 	}
 
 	
