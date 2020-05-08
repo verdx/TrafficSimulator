@@ -59,7 +59,7 @@ public class NewJunctionEvent extends Event {
 		
 		data.put("coor", coor);
 		data.put("ls_strategy", lsStrategy.save());
-		data.put("dp_strategy", dqStrategy.save());
+		data.put("dq_strategy", dqStrategy.save());
 
 		jo.put("data", data);
 		return jo;

@@ -75,4 +75,12 @@ public abstract class TableModel<T> extends AbstractTableModel implements Traffi
 
 	@Override
 	public void onError(String error) {}
+	
+	@Override
+	public void onSave() {}
+	
+	@Override
+	public void onLoad(RoadMap map, List<Event> events, int time) {
+		setContentsList(map, events);
+	}
 }

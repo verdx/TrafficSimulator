@@ -8,6 +8,9 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import simulator.misc.RoadComparator;
+import simulator.misc.SortedArrayList;
+
 public class Junction extends SimulatedObject {
 
 	private List<Road> in_roads;
@@ -38,6 +41,28 @@ public class Junction extends SimulatedObject {
 		}
 		currGreen = -1;
 		lastSwitchingTime = 0;
+		in_roads = new SortedArrayList<Road>(new RoadComparator());
+		outRoadByJunction = new HashMap<Junction, Road>();
+		queueByRoad = new HashMap<Road, List<Vehicle>>();
+		queues = new LinkedList<List<Vehicle>>();
+	}
+	
+	public Junction(String id, LightSwitchingStrategy lsStrategy, DequeuingStrategy dqStrategy, int xCoor, int yCoor, int currentGreen, int lastSwitchTime) throws JunctionCreationException {
+		super(id);
+		if (lsStrategy != null && dqStrategy != null) {
+			this.lsStrategy = lsStrategy;
+			this.dqStrategy = dqStrategy;
+		} else {
+			throw new JunctionCreationException("light-switching and dequeuing strategies can't be null.");
+		}	
+		if(xCoor >= 0 && yCoor >= 0) {
+			this.x = xCoor;
+			this.y = yCoor;
+		} else {
+			throw new JunctionCreationException("xCoor and yCoor can't be null.");
+		}
+		currGreen = currentGreen;
+		lastSwitchingTime = lastSwitchTime;
 		in_roads = new LinkedList<Road>();
 		outRoadByJunction = new HashMap<Junction, Road>();
 		queueByRoad = new HashMap<Road, List<Vehicle>>();
@@ -86,12 +111,25 @@ public class Junction extends SimulatedObject {
 		}
 		jo.put("queues", queues);
 		
+		
+		return jo;
+	}
+	
+	public JSONObject save() {
+		JSONObject jo = new JSONObject();
+		
 		JSONArray coor = new JSONArray();
 		coor.put(x);
 		coor.put(y);
 		jo.put("coor", coor);
+		
 		jo.put("ls_strategy", lsStrategy.save());
 		jo.put("dq_strategy", dqStrategy.save());
+		
+		jo.put("id", this._id);
+		jo.put("currGreen", currGreen);
+		jo.put("lastSwitchingTime", lastSwitchingTime);
+		
 		return jo;
 	}
 

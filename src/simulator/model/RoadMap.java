@@ -53,10 +53,15 @@ public class RoadMap {
 		}
 	}
 	
-	public void addVehicle(Vehicle v) {
+	public void addVehicle(Vehicle v) throws Exception {
 		if(canAddVehicle(v)) {
 			vehicles.add(v);
 			vehiclesMap.put(v._id, v);
+			if(v.getStatus() == VehicleStatus.TRAVELING) {
+				v.getRoad().enter(v);
+			}else if(v.getStatus() == VehicleStatus.WAITING) {
+					v.getCurrentJunction().enter(v);
+			}
 		}
 	}
 	
@@ -112,17 +117,14 @@ public class RoadMap {
 	
 	public List<Junction> getJunctions() {
 		return Collections.unmodifiableList(new ArrayList<>(junctions));
-		//return (new ArrayList<Junction>(junctions));
 	}
 	
 	public List<Road> getRoads() {
 		return Collections.unmodifiableList(new ArrayList<>(roads));
-		//return (new ArrayList<Road>(roads));
 	}
 	
 	public List<Vehicle> getVehicles() {
 		return Collections.unmodifiableList(new ArrayList<>(vehicles));
-		//return (new ArrayList<Vehicle>(vehicles));	
 		}
 	
 	//Alomejor no hace falta, borrar si se ve bien
@@ -160,7 +162,6 @@ public class RoadMap {
 	public JSONObject report() {
 		JSONObject jo = new JSONObject();
 		
-		
 		JSONArray junctions_ja = new JSONArray();
 		for(Junction j: junctions)
 			junctions_ja.put(j.report());
@@ -178,6 +179,29 @@ public class RoadMap {
 			vehicles_ja.put(v.report());
 		jo.put("vehicles", vehicles_ja);
 		
+		return jo;
+	}
+
+	public JSONObject save() {
+		JSONObject jo = new JSONObject();
+
+		JSONArray junctions_ja = new JSONArray();
+		for(Junction j: junctions)
+			junctions_ja.put(j.save());
+		jo.put("junctions", junctions_ja);
+
+
+		JSONArray roads_ja = new JSONArray();
+		for(Road r: roads) 
+			roads_ja.put(r.save());
+		jo.put("roads", roads_ja);
+
+
+		JSONArray vehicles_ja = new JSONArray();
+		for(Vehicle v: vehicles)
+			vehicles_ja.put(v.save());
+		jo.put("vehicles", vehicles_ja);
+
 		return jo;
 	}
 
@@ -203,13 +227,13 @@ public class RoadMap {
 			Junction junction = parseJunction(junctionsJSON.getJSONObject(i), lssFactory, dqsFactory);
 			this.addJunction(junction);
 		}
-		for(int i = 0; i < vehiclesJSON.length(); i++) {
-			Vehicle vehicle = parseVehicle(vehiclesJSON.getJSONObject(i));
-			this.addVehicle(vehicle);
-		}
 		for(int i = 0; i < roadsJSON.length(); i++) {
 			Road road = parseRoad(roadsJSON.getJSONObject(i));
 			this.addRoad(road);			
+		}
+		for(int i = 0; i < vehiclesJSON.length(); i++) {
+			Vehicle vehicle = parseVehicle(vehiclesJSON.getJSONObject(i));
+			this.addVehicle(vehicle);
 		}
 
 	}
@@ -220,15 +244,45 @@ public class RoadMap {
 		int yCoor = jo.getJSONArray("coor").getInt(1);
 		LightSwitchingStrategy lss = lssFactory.createInstance(jo.getJSONObject("ls_strategy"));
 		DequeuingStrategy dqs = dqsFactory.createInstance(jo.getJSONObject("dq_strategy"));
-		return new Junction(id, lss, dqs, xCoor, yCoor);
+		int currGreen = jo.getInt("currGreen");
+		int lastSwitchingTime = jo.getInt("lastSwitchingTime");
+		return new Junction(id, lss, dqs, xCoor, yCoor, currGreen, lastSwitchingTime);
 		
 	}
 
+	private Road parseRoad(JSONObject jo) throws Exception{
+		String id = jo.getString("id");
+		String src = jo.getString("src");
+		String dest = jo.getString("dest");
+		int length = jo.getInt("length");
+		int co2limit = jo.getInt("co2limit");
+		int maxSpeed = jo.getInt("speedlimit");
+		String weather_str = jo.getString("weather");
+		Weather weather = Weather.valueOf(weather_str.toUpperCase());
+		String type = jo.getString("type");
+		if(type.equals("inter_city_road")) {
+			return new InterCityRoad(id, this.getJunction(src), this.getJunction(dest), maxSpeed,
+					co2limit, length, weather);
+		} else if(type.contentEquals("city_road")) {
+			return new CityRoad(id, this.getJunction(src), this.getJunction(dest), maxSpeed,
+					co2limit, length, weather);
+		} else {
+			throw new Exception("Problem parsing road.");
+		}
+	}
 
 	private Vehicle parseVehicle(JSONObject jo) throws Exception {
 		String id = jo.getString("id");
 		int maxSpeed = jo.getInt("maxspeed");
-		int contClass = jo.getInt("class");
+		int contClass = jo.getInt("contClass");
+		int speed = jo.getInt("speed");
+		int distTotal = jo.getInt("distTotal");
+		int contTotal = jo.getInt("contTotal");
+		int nextJunction = jo.getInt("nextJunction");
+		
+		String status_str = jo.getString("status");
+		VehicleStatus status = VehicleStatus.valueOf(status_str);
+		
 		JSONArray itinerary_ja = jo.getJSONArray("itinerary");
 		List<String> itinerary = new ArrayList<String>();
 		for(int j = 0; j < itinerary_ja.length(); j++) {
@@ -244,29 +298,17 @@ public class RoadMap {
 				throw new Exception("Cannot find junction in itinerary.");
 			}
 		}
+		
+		Road road = null;
+		int location = 0;
+		
+		if(status != VehicleStatus.PENDING && status != VehicleStatus.ARRIVED) {
+			String road_str = jo.getString("road");
+			road = roadsMap.get(road_str);
+			location = jo.getInt("location");
+		} 
 			
-		return new Vehicle(id, maxSpeed, contClass, itinerary_j);
-	}
-	
-	private Road parseRoad(JSONObject jo) throws Exception{
-		String id = jo.getString("id");
-		String src = jo.getString("src");
-		String dest = jo.getString("dest");
-		int length = jo.getInt("length");
-		int co2limit = jo.getInt("co2limit");
-		int maxSpeed = jo.getInt("maxspeed");
-		String weather_str = jo.getString("weather");
-		Weather weather = Weather.valueOf(weather_str.toUpperCase());
-		String type = jo.getString("type");
-		if(type.equals("inter_city_road")) {
-			return new InterCityRoad(id, this.getJunction(src), this.getJunction(dest), maxSpeed,
-					co2limit, length, weather);
-		} else if(type.contentEquals("city_road")) {
-			return new CityRoad(id, this.getJunction(src), this.getJunction(dest), maxSpeed,
-					co2limit, length, weather);
-		} else {
-			throw new Exception("Problem parsing road.");
-		}
+		return new Vehicle(id, maxSpeed, contClass, itinerary_j, speed, location, contTotal, distTotal, status, nextJunction, road);
 	}
 	
 }

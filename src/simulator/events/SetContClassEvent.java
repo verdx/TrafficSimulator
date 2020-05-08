@@ -60,6 +60,7 @@ public class SetContClassEvent extends Event {
 			JSONObject temp = new JSONObject();
 			temp.put("vehicle", p.getFirst());
 			temp.put("class", p.getSecond());
+			info.put(temp);
 		}
 		data.put("info", info);
 

@@ -1,0 +1,147 @@
+{
+    "roadMap": {
+        "roads": [
+            {
+                "src": "j1",
+                "speedlimit": 120,
+                "length": 10000,
+                "weather": "SUNNY",
+                "co2limit": 15000,
+                "id": "r1",
+                "dest": "j3",
+                "type": "city_road",
+                "contTotal": 41106
+            },
+            {
+                "src": "j2",
+                "speedlimit": 120,
+                "length": 10000,
+                "weather": "STORM",
+                "co2limit": 10000,
+                "id": "r2",
+                "dest": "j3",
+                "type": "city_road",
+                "contTotal": 8232
+            },
+            {
+                "src": "j3",
+                "speedlimit": 120,
+                "length": 5000,
+                "weather": "SUNNY",
+                "co2limit": 500,
+                "id": "r3",
+                "dest": "j4",
+                "type": "inter_city_road",
+                "contTotal": 0
+            }
+        ],
+        "vehicles": [
+            {
+                "road": "r1",
+                "distTotal": 10000,
+                "maxspeed": 100,
+                "nextJunction": 2,
+                "location": 10000,
+                "itinerary": [
+                    "j1",
+                    "j3",
+                    "j4"
+                ],
+                "id": "v1",
+                "contClass": 5,
+                "speed": 0,
+                "contTotal": 41376,
+                "status": "WAITING"
+            },
+            {
+                "road": "r2",
+                "distTotal": 6800,
+                "maxspeed": 50,
+                "nextJunction": 2,
+                "location": 6800,
+                "itinerary": [
+                    "j2",
+                    "j3",
+                    "j4"
+                ],
+                "id": "v2",
+                "contClass": 2,
+                "speed": 50,
+                "contTotal": 8700,
+                "status": "TRAVELING"
+            }
+        ],
+        "junctions": [
+            {
+                "dq_strategy": {
+                    "data": {},
+                    "type": "move_first_dqs"
+                },
+                "coor": [
+                    50,
+                    50
+                ],
+                "ls_strategy": {
+                    "data": {"timeslot": 5},
+                    "type": "round_robin_lss"
+                },
+                "id": "j1",
+                "currGreen": -1,
+                "lastSwitchingTime": 0
+            },
+            {
+                "dq_strategy": {
+                    "data": {},
+                    "type": "move_first_dqs"
+                },
+                "coor": [
+                    50,
+                    150
+                ],
+                "ls_strategy": {
+                    "data": {"timeslot": 5},
+                    "type": "round_robin_lss"
+                },
+                "id": "j2",
+                "currGreen": -1,
+                "lastSwitchingTime": 0
+            },
+            {
+                "dq_strategy": {
+                    "data": {},
+                    "type": "move_first_dqs"
+                },
+                "coor": [
+                    150,
+                    100
+                ],
+                "ls_strategy": {
+                    "data": {"timeslot": 5},
+                    "type": "round_robin_lss"
+                },
+                "id": "j3",
+                "currGreen": 1,
+                "lastSwitchingTime": 136
+            },
+            {
+                "dq_strategy": {
+                    "data": {},
+                    "type": "move_first_dqs"
+                },
+                "coor": [
+                    250,
+                    100
+                ],
+                "ls_strategy": {
+                    "data": {"timeslot": 5},
+                    "type": "round_robin_lss"
+                },
+                "id": "j4",
+                "currGreen": 0,
+                "lastSwitchingTime": 1
+            }
+        ]
+    },
+    "time": 136,
+    "events": []
+}

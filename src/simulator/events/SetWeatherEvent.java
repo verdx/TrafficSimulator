@@ -61,6 +61,7 @@ public class SetWeatherEvent extends Event {
 			JSONObject temp = new JSONObject();
 			temp.put("road", p.getFirst());
 			temp.put("weather", p.getSecond());
+			info.put(temp);
 		}
 		data.put("info", info);
 

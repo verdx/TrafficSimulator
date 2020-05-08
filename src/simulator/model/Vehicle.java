@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import simulator.exceptions.RoadMethodException;
@@ -46,6 +47,32 @@ public class Vehicle extends SimulatedObject{
 				nextJunction = 1;
 			}
 	}
+	
+	public Vehicle(String id, int maxSpeed, int contClass,
+			List<Junction> itinerary, int speed, int location, int contTotal, int distTotal, 
+			VehicleStatus status, int nextJunction, Road road) throws VehicleCreationException {
+			super(id);
+			if(maxSpeed < 0) {
+				throw new VehicleCreationException("Speed must be positive.");
+			} else if(contClass < 0 || contClass > 10) {
+				throw new VehicleCreationException("Contamination Class must be between 0 and 10");	
+			} else if(itinerary.size() < 2) {
+				throw new VehicleCreationException("Itinerary has to be of length 2.");
+			} else {
+				this.maxSpeed = maxSpeed;
+				this.contClass = contClass;
+				this.itinerary = Collections.unmodifiableList(new ArrayList<>(itinerary));
+				this.speed = speed;
+				this.location = location;
+				this.contTotal = contTotal;
+				this.distTotal = distTotal;
+				this.status = status;
+				this.nextJunction = nextJunction;
+				this.road = road;
+			}
+			
+	}
+
 
 
 	@Override
@@ -93,6 +120,32 @@ public class Vehicle extends SimulatedObject{
 			jo.put("road", road._id);
 			jo.put("location", location);
 		}
+		return jo;
+	}
+	
+	public JSONObject save() {
+		JSONObject jo = new JSONObject();
+		// we put some keys with simple values into 'jo1'
+		jo.put("id", _id);
+		jo.put("maxspeed", maxSpeed);
+		jo.put("speed", speed);
+		jo.put("distTotal", distTotal);
+		jo.put("contTotal", contTotal);
+		jo.put("contClass", contClass);
+		jo.put("status", status.toString());
+		jo.put("nextJunction", nextJunction);
+		
+		if(status != VehicleStatus.PENDING && status != VehicleStatus.ARRIVED) {
+			jo.put("road", road._id);
+			jo.put("location", location);
+		}
+		
+		JSONArray itineraryJSON = new JSONArray();
+		for(Junction j: itinerary) {
+			itineraryJSON.put(j.getId());
+		}
+		
+		jo.put("itinerary", itineraryJSON);
 		return jo;
 	}
 	
@@ -177,7 +230,15 @@ public class Vehicle extends SimulatedObject{
 	}
 
 
-	public Object getDistance() {
+	public int getDistance() {
 		return distTotal;
+	}
+
+	public Junction getCurrentJunction() throws Exception {
+		if(status == VehicleStatus.WAITING) {
+			return itinerary.get(nextJunction - 1);
+		} else { 
+			throw new Exception("This vehicle is not in a junction right now");
+		}
 	}
 }

@@ -181,7 +181,6 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 				}
 				return s;
 			}
-			
 		};
 		return vehiclesTable;
 		
@@ -220,7 +219,6 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 				}
 				return s;
 			}
-			
 		};
 		return junctionsTable;
 	}
@@ -407,6 +405,18 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 		stopSim();
 		contPanel.enableToolBar(true);
 		statusBar.actualizarEvents(err);
+	}
+
+	@Override
+	public void onSave() {
+		statusBar.actualizarEvents("Juego guardado");
+		
+	}
+
+	@Override
+	public void onLoad(RoadMap map, List<Event> event, int time) {
+		statusBar.actualizarEvents("Se ha cargado un juego");
+		statusBar.actualizarTime("" + time);
 	}
 
 }

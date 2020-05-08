@@ -107,7 +107,7 @@ public class TrafficSimulator implements Observable<TrafficSimObserver>{
 
 		jo.put("time", _time);
 
-		JSONObject roadMapJson = roadMap.report();
+		JSONObject roadMapJson = roadMap.save();
 
 		jo.put("roadMap", roadMapJson);
 		
@@ -118,6 +118,9 @@ public class TrafficSimulator implements Observable<TrafficSimObserver>{
 		
 		jo.put("events", eventsJson);
 		
+		for(TrafficSimObserver ob: observers) {
+			ob.onSave();
+		}
 		return jo;
 	}
 	
@@ -157,6 +160,9 @@ public class TrafficSimulator implements Observable<TrafficSimObserver>{
 		_time = jo.getInt("time");
 		JSONObject roadmap = jo.getJSONObject("roadMap");
 		roadMap.load(roadmap);	
+		for(TrafficSimObserver ob: observers) {
+			ob.onLoad(roadMap, events, _time);
+		}
 	}
 
 }

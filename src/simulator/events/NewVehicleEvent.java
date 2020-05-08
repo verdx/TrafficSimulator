@@ -60,7 +60,7 @@ public class NewVehicleEvent extends Event {
 		JSONObject data = new JSONObject();
 		data.put("time", _time);
 		data.put("id", id);
-		data.put("maxpeed", maxSpeed);
+		data.put("maxspeed", maxSpeed);
 		data.put("class", contClass);
 		
 		JSONArray itineraryJSON = new JSONArray();

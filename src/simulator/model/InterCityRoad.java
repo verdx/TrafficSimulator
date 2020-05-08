@@ -1,6 +1,5 @@
 package simulator.model;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import simulator.exceptions.RoadCreationException;
@@ -45,9 +44,8 @@ public class InterCityRoad extends Road {
 		return resul;
 	}
 	
-	@Override
-	public JSONObject report() {
-		JSONObject jo = super.report();
+	public JSONObject save() {
+		JSONObject jo = super.save();
 		jo.put("type", "inter_city_road");
 		return jo;
 	}

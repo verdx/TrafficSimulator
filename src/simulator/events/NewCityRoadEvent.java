@@ -42,8 +42,8 @@ public class NewCityRoadEvent extends NewRoadEvent {
 		data.put("id", id);
 		data.put("src", srcJunc);
 		data.put("dest", destJunc);
-		data.put("maxpeed", maxSpeed);
-		data.put("co2Limit", contLimit);
+		data.put("maxspeed", maxSpeed);
+		data.put("co2limit", contLimit);
 		data.put("length", length);
 		data.put("weather", weather);
 		jo.put("data", data);

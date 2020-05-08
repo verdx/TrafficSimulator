@@ -92,13 +92,24 @@ public abstract class Road extends SimulatedObject {
 		return jo;
 	}
 	
+	public JSONObject save() {
+		JSONObject jo = new JSONObject();
+		jo.put("id", _id);
+		jo.put("length", length);
+		jo.put("speedlimit", speedLimit);
+		jo.put("weather", weather);
+		jo.put("contTotal", contTotal);
+		jo.put("co2limit", contLimit);
+		
+		jo.put("src", srcJunc.getId());
+		jo.put("dest", destJunc.getId());
+		
+		return jo;
+	}
+	
 	protected void enter(Vehicle v) throws RoadMethodException {
-		if (v.getLocation() == 0 && v.getSpeed() == 0) {
-			vehicles.add(v);
-			vehiclesMap.put(v._id, v);
-		} else {
-			throw new RoadMethodException("Velocity and location must be 0 to let vehicle enter.");
-		}
+		vehicles.add(v);
+		vehiclesMap.put(v._id, v);
 	}
 
 	protected void exit(Vehicle v) {

@@ -208,4 +208,10 @@ public class TopMenuBar extends JMenuBar implements TrafficSimObserver{
 	public void onError(String err​) {
 	}
 
+	@Override
+	public void onSave() {}
+
+	@Override
+	public void onLoad(RoadMap map, List<Event> event, int time) {}
+
 }

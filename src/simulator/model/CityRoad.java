@@ -39,9 +39,8 @@ public class CityRoad extends Road {
 		return resul;
 	}
 	
-	@Override
-	public JSONObject report() {
-		JSONObject jo = super.report();
+	public JSONObject save() {
+		JSONObject jo = super.save();
 		jo.put("type", "city_road");
 		return jo;
 	}
