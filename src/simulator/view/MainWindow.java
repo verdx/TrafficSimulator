@@ -296,7 +296,7 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 			if(returnVal != JFileChooser.APPROVE_OPTION)
 				throw new FileNotFoundException();
 			_ctrl.reset();
-			_ctrl.loadEvents(new FileInputStream(jsonChooser.getSelectedFile()));
+			_ctrl.loadEvents(jsonChooser.getSelectedFile());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Error retrieving events from file: " + e.getMessage());
 			e.printStackTrace();
@@ -347,6 +347,11 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 	
 	void reset() {
 		_ctrl.totalReset();
+		try {
+			_ctrl.loadSavedEventsFile();
+		} catch (Exception e) {
+			System.out.println("No events file to load from");
+		}
 	}
 	
 	void save() {

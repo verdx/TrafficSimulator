@@ -1,5 +1,6 @@
 package simulator.launcher;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -185,8 +186,8 @@ public class Main {
 			} else {
 				out = System.out;
 			}
-			InputStream in = new FileInputStream(_inFile);
-			cont.loadEvents(in);
+			File infile = new File(_inFile);
+			cont.loadEvents(infile);
 			cont.run(_timeLimit, out);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -198,8 +199,8 @@ public class Main {
 		try {
 			Controller cont = new Controller(sim, _eventsFactory);
 			if(_inFile != null) {
-				InputStream in = new FileInputStream(_inFile);
-				cont.loadEvents(in);
+				File infile = new File(_inFile);
+				cont.loadEvents(infile);
 			}
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override

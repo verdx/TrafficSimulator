@@ -25,6 +25,7 @@ public class Controller{
 
 	private TrafficSimulator sim;
 	private Factory<Event> eventsFactory;
+	private File eventsFile;
 	private int simStatus;
 	private short undos;
 	private boolean redo;
@@ -50,8 +51,10 @@ public class Controller{
 		sim.load(jo);
 	}
 
-	public void loadEvents(InputStream in) throws Exception {
+	public void loadEvents(File infile) throws Exception {
 		try {
+			eventsFile = infile;
+			InputStream in = new FileInputStream(infile);
 			JSONObject jo = new JSONObject(new JSONTokener(in));
 			JSONArray events = jo.getJSONArray("events");
 			loadEventsArray(events);
@@ -185,6 +188,12 @@ public class Controller{
 				file.delete();
 			}
 		}	
+	}
+	
+	public void loadSavedEventsFile() throws Exception {
+		if(eventsFile != null) {
+			loadEvents(eventsFile);
+		}
 	}
 
 }
