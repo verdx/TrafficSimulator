@@ -39,6 +39,7 @@ public class Controller{
 			undos = 0;
 			redo = false;
 		}
+		new File("resources/savedStates").mkdirs();
 	}
 
 	public void load(InputStream in) throws Exception {
@@ -80,6 +81,13 @@ public class Controller{
 	public void reset() {
 		sim.reset();
 	}
+	
+	public void totalReset() {
+		simStatus = 0;
+		undos  = 0;
+		redo = false;
+		reset();
+	}
 
 	public void addObserver(TrafficSimObserver o) {
 		sim.addObserver(o);
@@ -94,6 +102,7 @@ public class Controller{
 	}
 
 	public void run(int n) throws Exception{
+		redo = false;
 		for(int i = 0; i < n; i++) {
 			sim.advance();
 		}
@@ -108,15 +117,15 @@ public class Controller{
 	}
 	
 	public void saveState() {
-		saveStateAux();
+		saveStateImpl();
 		simStatus++;
 		if(undos > 0) undos--;
 		redo = false;
 	}
 	
-	private void saveStateAux() {
+	private void saveStateImpl() {
 		JSONObject jo = save();
-		File file = new File("resources/ss" + simStatus % 4 + ".json");
+		File file = new File("resources/savedStates/ss" + simStatus % 4 + ".json");
 		try {
 			if(!file.exists()) {
 				file.createNewFile();
@@ -132,13 +141,13 @@ public class Controller{
 	
 	public void undo() {
 		try {
-			if(undos > 3) throw new Exception("Can't undo more than four times");
+			if(undos >= 3) throw new Exception("Can't undo more than four times");
 			if(simStatus < 1) throw new Exception("Not enough saved states");
-			saveStateAux();
+			if (!redo) saveStateImpl();
 			undos++;
 			simStatus--;
 			redo = true;
-			File file = new File("resources/ss" + simStatus  % 4 + ".json");
+			File file = new File("resources/savedStates/ss" + simStatus  % 4 + ".json");
 			load(new FileInputStream(file));
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Dialog",
@@ -149,13 +158,17 @@ public class Controller{
 		return redo;
 	}
 	
+	public boolean canUndo() {
+		return (simStatus > 0 && undos < 3);
+	}
+	
 	public void redo() {
 		try {
 			if(!redo || undos <= 0) throw new Exception("Can't redo right now");
 			undos--;
 			simStatus++;
-			redo = (undos > 1);
-			File file = new File("resources/ss" + simStatus % 4 + ".json");
+			redo = (undos >= 1);
+			File file = new File("resources/savedStates/ss" + simStatus % 4 + ".json");
 			load(new FileInputStream(file));
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Dialog",
@@ -167,7 +180,7 @@ public class Controller{
 	public void close() {
 		File file;
 		for(int i = 0; i < 4;i++) {
-			file = new File("resources/ss" + i + ".json");
+			file = new File("resources/savedStates/ss" + i + ".json");
 			if(file.exists()) {
 				file.delete();
 			}

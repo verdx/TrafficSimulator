@@ -159,6 +159,7 @@ public class ControlPanel extends JPanel{
 		});
 		undoButton.setIcon(new ImageIcon("resources/icons/undo.png"));
 		undoButton.setVisible(true);
+		undoButton.setEnabled(false);
 
 		//UndoButton
 		redoButton = new JButton();
@@ -248,6 +249,9 @@ public class ControlPanel extends JPanel{
 
 	public void enableRedo(boolean bool) {
 		redoButton.setEnabled(bool);
+	}
+	public void enableUndo(boolean bool) {
+		undoButton.setEnabled(bool);
 	}
 
 	

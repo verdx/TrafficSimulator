@@ -346,7 +346,7 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 	}
 	
 	void reset() {
-		_ctrl.reset();
+		_ctrl.totalReset();
 	}
 	
 	void save() {
@@ -361,6 +361,7 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 				file = new File(file.getParentFile(), file.getName() + ".json");
 			}
 			try {
+				@SuppressWarnings("resource")
 				FileWriter fw = new FileWriter(file);
 				fw.write(jo.toString(4));
 				fw.flush();
@@ -376,6 +377,7 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 		try {
 			if(returnVal != JFileChooser.APPROVE_OPTION)
 				throw new FileNotFoundException();
+			_ctrl.totalReset();
 			_ctrl.load(new FileInputStream(jsonChooser.getSelectedFile()));
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Error retrieving events from file: " + e.getMessage());
@@ -397,6 +399,7 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 	public void onAdvanceStart(RoadMap map, List<Event> events, int time) {
 		statusBar.actualizarTime("Time: " + time);
 		statusBar.actualizarEvents("Running simulation");
+		contPanel.enableRedo(_ctrl.canRedo()); 
 	}
 	@Override
 	public void onAdvanceEnd(RoadMap map, List<Event> events, int time) {
@@ -414,6 +417,7 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 		statusBar.actualizarTime("");
 		statusBar.actualizarEvents("Simulator resetted");
 		contPanel.enableRedo(_ctrl.canRedo());
+		contPanel.enableUndo(_ctrl.canUndo());
 	}
 	@Override
 	public void onRegister(RoadMap map, List<Event> events, int time) {
