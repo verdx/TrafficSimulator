@@ -382,6 +382,8 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 		try {
 			if(returnVal != JFileChooser.APPROVE_OPTION)
 				throw new FileNotFoundException();
+			File loadFile = jsonChooser.getSelectedFile();
+			if(!loadFile.exists()) throw new FileNotFoundException();
 			_ctrl.totalReset();
 			_ctrl.load(new FileInputStream(jsonChooser.getSelectedFile()));
 		} catch (Exception e) {
