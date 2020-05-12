@@ -28,8 +28,8 @@ public abstract class CustomDialog extends JDialog{
 	protected JComboBox<Object> list2DropList;
 	protected SpinnerNumberModel ticksSpinnerNM;
 
-	public CustomDialog(Controller ctrl, List<?> list1, List<?> list2, int time, String nombreLista1, String nombreLista2, String descripcion) {
-		super();
+	public CustomDialog(MainWindow mw, Controller ctrl, List<?> list1, List<?> list2, int time, String nombreLista1, String nombreLista2, String descripcion) {
+		super(mw, true);
 		
 		_ctrl = ctrl;
 		_time = time;

@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -109,10 +108,6 @@ public class Controller{
 		for(int i = 0; i < n; i++) {
 			sim.advance();
 		}
-	}
-
-	public List<Event> getEvents() {
-		return sim.getEvents();
 	}
 
 	public JSONObject save() {

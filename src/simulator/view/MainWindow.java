@@ -141,7 +141,7 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 			}
 			
 		};
-		eventsTable.setContentsList(null, _ctrl.getEvents());
+		//eventsTable.setContentsList(null, _ctrl.getEvents());
 		return eventsTable;
 	}
 	
@@ -304,11 +304,11 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 	}
 
 	void cambiarClaseContPulsado(List<Vehicle> vehicles, int time) {
-		new ClaseContDialog(_ctrl, vehicles, time);
+		new ClaseContDialog(this, _ctrl, vehicles, time);
 	}
 
 	void cambiarWeatherPulsado(List<Road> roads, int time) {
-		new ChangeWeatherDialog(_ctrl, roads, time);
+		new ChangeWeatherDialog(this, _ctrl, roads, time);
 	}
 	
 	void runSimGeneral() {
@@ -435,18 +435,6 @@ public class MainWindow extends JFrame implements TrafficSimObserver{
 		stopSim();
 		contPanel.enableToolBar(true);
 		statusBar.actualizarEvents(err);
-	}
-
-	@Override
-	public void onSave() {
-		statusBar.actualizarEvents("Juego guardado");
-		
-	}
-
-	@Override
-	public void onLoad(RoadMap map, List<Event> event, int time) {
-		statusBar.actualizarEvents("Se ha cargado un juego");
-		statusBar.actualizarTime("" + time);
 	}
 
 	public void undo() {

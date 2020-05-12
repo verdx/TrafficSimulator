@@ -18,8 +18,8 @@ public class ChangeWeatherDialog extends CustomDialog{
 
 	private static final long serialVersionUID = 1L;
 
-	public ChangeWeatherDialog(Controller _ctrl, List<Road> roads, int _time) {
-		super(_ctrl, roads, new ArrayList<>(Arrays.asList(Weather.values())), _time, "Road", "Weather", "Schedule an event to change the weather of a road after a given number of simulation ticks from now.");
+	public ChangeWeatherDialog(MainWindow mw, Controller _ctrl, List<Road> roads, int _time) {
+		super(mw, _ctrl, roads, new ArrayList<>(Arrays.asList(Weather.values())), _time, "Road", "Weather", "Schedule an event to change the weather of a road after a given number of simulation ticks from now.");
 	}
 
 	@Override

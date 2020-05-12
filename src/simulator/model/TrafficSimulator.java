@@ -1,7 +1,6 @@
 package simulator.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -118,9 +117,6 @@ public class TrafficSimulator implements Observable<TrafficSimObserver>{
 		
 		jo.put("events", eventsJson);
 		
-		for(TrafficSimObserver ob: observers) {
-			ob.onSave();
-		}
 		return jo;
 	}
 	
@@ -136,32 +132,17 @@ public class TrafficSimulator implements Observable<TrafficSimObserver>{
 		observers.remove(o);
 	}
 
-	public List<Vehicle> getVehicles() {
-		return roadMap.getVehicles();
-	}
 
 	public int getTime() {
 		return _time;
 	}
-
-	public List<Road> getRoads() {
-		return roadMap.getRoads();
-	}
-
-	public List<Event> getEvents() {
-		return Collections.unmodifiableList(new ArrayList<Event>(events));
-	}
-
-	public List<Junction> getJunctions() {
-		return roadMap.getJunctions();
-	}
-
+	
 	public void load(JSONObject jo) throws Exception {
 		_time = jo.getInt("time");
 		JSONObject roadmap = jo.getJSONObject("roadMap");
 		roadMap.load(roadmap);	
 		for(TrafficSimObserver ob: observers) {
-			ob.onLoad(roadMap, events, _time);
+			ob.onRegister(roadMap, events, _time);
 		}
 	}
 

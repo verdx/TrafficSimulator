@@ -103,16 +103,4 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 	public void onRegister(RoadMap map​, List<Event> events, int time​) {}
 	@Override
 	public void onError(String error) {}
-
-	@Override
-	public void onSave() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onLoad(RoadMap map, List<Event> event, int time) {
-		// TODO Auto-generated method stub
-		
-	}
 }

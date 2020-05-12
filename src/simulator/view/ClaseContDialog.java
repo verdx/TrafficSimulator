@@ -17,8 +17,8 @@ public class ClaseContDialog extends CustomDialog{
 
 	private static final long serialVersionUID = 1L;
 
-	public ClaseContDialog(Controller _ctrl, List<Vehicle> vehicles, int _time) {
-		super(_ctrl, vehicles, new ClaseContList(), _time, "Vehicle", "CO2 Class", "Schedule an event to change the CO2 class of a vehicle after a given number of simulation ticks from now.");
+	public ClaseContDialog(MainWindow mw, Controller _ctrl, List<Vehicle> vehicles, int _time) {
+		super(mw, _ctrl, vehicles, new ClaseContList(), _time, "Vehicle", "CO2 Class", "Schedule an event to change the CO2 class of a vehicle after a given number of simulation ticks from now.");
 		
 	}
 
