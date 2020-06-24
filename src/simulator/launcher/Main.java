@@ -33,6 +33,7 @@ import simulator.factories.NewVehicleEventBuilder;
 import simulator.factories.RoundRobinStrategyBuilder;
 import simulator.factories.SetContClassEventBuilder;
 import simulator.factories.SetWeatherEventBuilder;
+import simulator.factories.VipRoundRobinStrategyBuilder;
 import simulator.model.DequeuingStrategy;
 import simulator.model.LightSwitchingStrategy;
 import simulator.model.TrafficSimulator;
@@ -152,6 +153,7 @@ public class Main {
 		List<Builder<LightSwitchingStrategy>> lsbs = new ArrayList<>();
 		lsbs.add( new RoundRobinStrategyBuilder() );
 		lsbs.add( new MostCrowdedStrategyBuilder() );
+		lsbs.add(new VipRoundRobinStrategyBuilder() );
 		Factory<LightSwitchingStrategy> lssFactory = new BuilderBasedFactory
 				<>(lsbs);
 
