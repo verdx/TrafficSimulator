@@ -31,6 +31,7 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private Controller _ctrl;
 	private JFileChooser jsonChooser;
+	private CO2TableModel co2table;
 	private ControlPanel contPanel;
 	private boolean _stopped;
 
@@ -64,6 +65,8 @@ public class MainWindow extends JFrame {
 		JPanel mapsPanel = new JPanel();
 		mapsPanel.setLayout(new BoxLayout(mapsPanel, BoxLayout.Y_AXIS));
 		viewsPanel.add(mapsPanel);
+		
+		this.co2table = new CO2TableModel(_ctrl);
 
 		//tables
 		JPanel eventsView = createViewPanel(new JTable(createEventsTable()), "Events");
@@ -331,6 +334,10 @@ public class MainWindow extends JFrame {
 	
 	void reset() {
 		_ctrl.reset();
+	}
+
+	public void verCO2Pulsado(List<Road> roads, int time) {
+		new VerCO2Dialog(co2table);	
 	}
 
 }

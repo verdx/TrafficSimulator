@@ -36,6 +36,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 	private JButton cargaFicheros;
 	private JButton cambiarClaseCont;
 	private JButton cambiarWeather;
+	private JButton verCO2;
 	private SpinnerNumberModel ticksSpinnerNM;
 	private JSpinner ticksSpinner;
 	private JButton runButton;
@@ -110,6 +111,22 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		});
 		cambiarWeather.setVisible(true);
 		cambiarWeather.setIcon(new ImageIcon("resources/icons/weather.png"));
+		
+		//Ver el total de contaminacion
+		verCO2 = new JButton();
+		verCO2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						_mw.verCO2Pulsado(_map.getRoads(), _time);
+					}
+				});
+			}	
+		});
+		verCO2.setVisible(true);
+		verCO2.setIcon(new ImageIcon("resources/icons/pie-chart.png"));
 
 		//TicksSpinner
 		JLabel ticksText = new JLabel("Ticks: ");
@@ -187,6 +204,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		toolBar.addSeparator();
 		toolBar.add(cambiarClaseCont);
 		toolBar.add(cambiarWeather);
+		toolBar.add(verCO2);
 		toolBar.addSeparator();
 		toolBar.add(runButton);
 		toolBar.add(stopButton);
@@ -208,6 +226,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver{
 		ticksSpinner.setEnabled(bool);
 		runButton.setEnabled(bool);
 		resetButton.setEnabled(bool);
+		verCO2.setEnabled(bool);
 	}
 
 	int getTicks() {
